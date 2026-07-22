@@ -30,24 +30,24 @@ const rowOne: StripItem[] = [
     headline: "Insight before execution",
     body: "A great product without insight earns applause — not sales.",
   },
-  { type: "image", src: decor.fernMacro, label: "Botanical", caption: "Fern macro" },
+  { type: "image", src: decor.studio, label: "Studio", caption: "Creative direction" },
   { type: "text", variant: "stat", headline: "500+", body: "digital projects delivered" },
-  { type: "image", src: decor.aerialTealGold, label: "Organic", caption: "Aerial tones" },
+  { type: "image", src: decor.lifestyle, label: "Campaign", caption: "Brand storytelling" },
   { type: "text", variant: "phrase", headline: "Research · Insight · Campaign" },
-  { type: "image", src: decor.palmLeaf, label: "Texture", caption: "Palm leaf" },
+  { type: "image", src: decor.product, label: "Product", caption: "Launch visuals" },
 ];
 
 const rowTwo: StripItem[] = [
-  { type: "image", src: decor.watercolor, label: "Wash", caption: "Watercolor texture" },
+  { type: "image", src: decor.urban, label: "Urban", caption: "Out-of-home" },
   {
     type: "text",
     variant: "quote",
     headline: "Talent, creativity & integrity",
     body: "How we work matters as much as what we make.",
   },
-  { type: "image", src: decor.motionBlur, label: "Motion", caption: "Energy in motion" },
+  { type: "image", src: decor.campaign, label: "Film", caption: "Campaign stills" },
   { type: "text", variant: "stat", headline: "20+", body: "creative & digital awards" },
-  { type: "image", src: decor.leafVariegated, label: "Detail", caption: "Leaf patterns" },
+  { type: "image", src: decor.portrait, label: "People", caption: "Talent & culture" },
   { type: "text", variant: "phrase", headline: "Purpose over noise" },
 ];
 
@@ -188,7 +188,7 @@ export default function ImageMarquee() {
             className="relative aspect-[4/5] overflow-hidden border border-cream-dark"
           >
             <Image
-              src={decor.fluidTealGold}
+              src={decor.studio}
               alt=""
               fill
               className="object-cover"

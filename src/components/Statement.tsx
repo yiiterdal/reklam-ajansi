@@ -11,19 +11,19 @@ const statements = [
     label: "Our belief",
     title: "Insight at the center, behavior change as the goal",
     body: "We develop communication strategies that place consumer insight at the heart of every decision. Making creative work is not enough for us — we believe we succeed when we shift audience behavior and deliver measurable value back to the brand.",
-    image: images.decor.fluidTealGold,
+    image: images.decor.studio,
   },
   {
     label: "How we operate",
     title: "Talent, creativity, and integrity — together",
     body: "Our work is built on more than ideas alone. We combine creative excellence with ethical practice: acting fairly, communicating responsibly, and protecting the trust our clients place in us. That foundation is what lets us do ambitious work with confidence.",
-    image: images.decor.verticalOrganic,
+    image: images.decor.team,
   },
   {
     label: "Beyond the brief",
     title: "Active members of the communities we serve",
     body: "We aim to be contributors, not bystanders — donating our time, talent, and creative energy to causes that matter. Diversity of thought, culture, and experience makes us stronger and helps us deliver more extraordinary solutions for every client.",
-    image: images.decor.textureDark,
+    image: images.decor.campaign,
   },
 ];
 

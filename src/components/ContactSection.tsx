@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { m } from "framer-motion";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function ContactSection() {
   const [name, setName] = useState("");
@@ -30,7 +31,7 @@ export default function ContactSection() {
             <p>
               <span className="font-semibold text-black">Email</span>
               <br />
-              contact@studio.com
+              hello@bearstow.agency
             </p>
             <p>
               <span className="font-semibold text-black">Phone</span>
@@ -97,12 +98,14 @@ export default function ContactSection() {
                   className="w-full resize-none border-b border-gray-300 bg-transparent py-2 text-sm outline-none focus:border-black"
                 />
               </div>
-              <button
-                type="submit"
-                className="bg-black px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-gray-800"
-              >
-                Send
-              </button>
+              <MagneticButton>
+                <button
+                  type="submit"
+                  className="bg-black px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-gray-800"
+                >
+                  Send
+                </button>
+              </MagneticButton>
             </form>
           )}
         </div>

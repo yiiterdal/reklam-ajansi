@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
+import RevealText from "@/components/RevealText";
 
 const collage = [
-  { src: images.decor.fluidTealGold, className: "top-0 right-0 z-10 w-[72%] aspect-[4/5]" },
-  { src: images.decor.fernMacro, className: "bottom-0 left-0 z-20 w-[55%] aspect-square" },
-  { src: images.decor.glowTealOrange, className: "bottom-8 right-8 z-30 w-[38%] aspect-[3/4] hidden sm:block" },
+  { src: images.decor.studio, className: "top-0 right-0 z-10 w-[72%] aspect-[4/5]" },
+  { src: images.decor.team, className: "bottom-0 left-0 z-20 w-[55%] aspect-square" },
+  { src: images.decor.campaign, className: "bottom-8 right-8 z-30 w-[38%] aspect-[3/4] hidden sm:block" },
 ];
 
 export default function HomeIntro() {
@@ -25,8 +26,8 @@ export default function HomeIntro() {
             Independent creative agency
           </p>
           <h2 className="mt-5 font-[family-name:var(--font-display)] text-4xl leading-snug text-ink lg:text-5xl">
-            From idea to reality
-            <span className="italic"> in the digital world</span>
+            <RevealText as="span" text="From idea to reality" className="block" />
+            <RevealText as="span" text="in the digital world" className="block italic" delay={0.1} />
           </h2>
           <p className="mt-6 text-base leading-relaxed text-ink-muted lg:text-lg">
             Far from clichés — clear, engaging, and built to perform. Across 500+

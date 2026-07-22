@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { images } from "@/lib/images";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function Cta() {
   return (
@@ -33,12 +34,14 @@ export default function Cta() {
               Tell us about your goals. We&apos;ll explore how insight-led creative
               can help you grow.
             </p>
-            <Link
-              href="/contact"
-              className="mt-8 inline-block rounded-full bg-ink px-8 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-accent"
-            >
-              Start a project
-            </Link>
+            <MagneticButton className="mt-8">
+              <Link
+                href="/contact"
+                className="inline-block rounded-full bg-ink px-8 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-accent"
+              >
+                Start a project
+              </Link>
+            </MagneticButton>
           </div>
         </div>
       </div>

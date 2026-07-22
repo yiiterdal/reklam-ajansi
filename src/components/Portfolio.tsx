@@ -11,21 +11,21 @@ const projects = [
     category: "Brand Identity",
     description:
       "Full brand strategy and visual identity for a sustainable fashion label — positioning, key visual system, brand book, and launch campaign across digital and retail channels.",
-    image: images.decor.leafWarm,
+    image: images.decor.studio,
   },
   {
     name: "Pulse Health",
     category: "Digital Campaign",
     description:
       "Insight-led digital campaign for a health-tech startup — audience research, message architecture, social content, and performance media driving 3× engagement in a competitive category.",
-    image: images.decor.abstractFluid1,
+    image: images.decor.campaign,
   },
   {
     name: "Field & Co.",
     category: "Launch Campaign",
     description:
       "End-to-end launch across ATL, BTL, and digital for a DTC food brand — from brand promise and key visual to outdoor, packaging, and paid social across three markets.",
-    image: images.decor.aerialTealGold,
+    image: images.decor.lifestyle,
   },
 ];
 

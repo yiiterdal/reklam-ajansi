@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { m } from "framer-motion";
+import RevealText from "@/components/RevealText";
 
 const principles = [
   {
@@ -35,9 +36,8 @@ export default function Diversity() {
             Our values
           </p>
           <h2 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold lg:text-5xl">
-            Built on integrity,
-            <br />
-            strengthened by diversity
+            <RevealText as="span" text="Built on integrity," className="block" />
+            <RevealText as="span" text="strengthened by diversity" className="block" delay={0.1} />
           </h2>
         </m.div>
 

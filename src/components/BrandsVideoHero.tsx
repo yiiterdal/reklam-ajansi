@@ -3,12 +3,13 @@
 import { m } from "framer-motion";
 import AnimatedVisual from "@/components/AnimatedVisual";
 
+/** Full-bleed hero under the fixed transparent header — no black gap. */
 export default function BrandsVideoHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-black pt-[72px]">
-      <div className="relative mx-auto aspect-[16/9] max-h-[85vh] min-h-[280px] w-full max-w-[1920px]">
+    <section className="relative w-full overflow-hidden bg-[#1a0f24]">
+      <div className="relative min-h-[min(85vh,760px)] w-full lg:min-h-[min(90vh,860px)]">
         <AnimatedVisual
-          src="/images/fluid-teal-gold.png"
+          src="/images/abstract-fluid-1.png"
           index={0}
           priority
           sizes="100vw"
@@ -19,18 +20,18 @@ export default function BrandsVideoHero() {
           className="pointer-events-none absolute inset-0"
           animate={{
             background: [
-              "radial-gradient(ellipse at 20% 30%, rgba(45,212,191,0.35), transparent 50%)",
-              "radial-gradient(ellipse at 80% 60%, rgba(251,146,60,0.35), transparent 50%)",
-              "radial-gradient(ellipse at 40% 70%, rgba(167,139,250,0.3), transparent 50%)",
-              "radial-gradient(ellipse at 20% 30%, rgba(45,212,191,0.35), transparent 50%)",
+              "radial-gradient(ellipse at 20% 30%, rgba(139,92,246,0.42), transparent 50%)",
+              "radial-gradient(ellipse at 80% 60%, rgba(192,38,211,0.35), transparent 50%)",
+              "radial-gradient(ellipse at 40% 70%, rgba(168,85,247,0.35), transparent 50%)",
+              "radial-gradient(ellipse at 20% 30%, rgba(139,92,246,0.42), transparent 50%)",
             ],
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/25" />
 
-        <div className="absolute inset-0 flex items-end px-6 pb-10 lg:px-10 lg:pb-16">
+        <div className="absolute inset-0 flex items-end px-6 pb-10 pt-24 lg:px-10 lg:pb-16 lg:pt-28">
           <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,7 +39,7 @@ export default function BrandsVideoHero() {
             className="max-w-xl font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl lg:text-4xl"
           >
             Color, motion, and story —
-            <span className="text-teal-200"> for every brand.</span>
+            <span className="text-violet-200"> for every brand.</span>
           </m.p>
         </div>
       </div>

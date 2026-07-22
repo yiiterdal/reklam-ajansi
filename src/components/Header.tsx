@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { m, AnimatePresence } from "framer-motion";
+import BearLogo from "@/components/BearLogo";
 
 const navLinks = [
   { label: "About", href: "/about" },
+  { label: "Work", href: "/portfolio" },
   { label: "Our Brands", href: "/brands" },
-  { label: "Careers", href: "/contact" },
+  { label: "Services", href: "/services" },
+  { label: "Visuals", href: "/visuals" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -18,11 +21,12 @@ const socialLinks = [
   { label: "YouTube", href: "https://youtube.com" },
 ];
 
-const transparentHeaderRoutes = ["/", "/brands"];
+/** Routes with a dark first viewport — white nav until scroll. */
+const darkTransparentRoutes = new Set(["/", "/about"]);
 
 export default function Header() {
   const pathname = usePathname();
-  const onTransparentHero = transparentHeaderRoutes.includes(pathname);
+  const onDarkHero = darkTransparentRoutes.has(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -35,27 +39,40 @@ export default function Header() {
 
   useEffect(() => {
     setMenuOpen(false);
+    // Unlock any leftover scroll lock from Topology intro when leaving home
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
   }, [pathname]);
 
-  const solid = onTransparentHero ? scrolled : true;
+  const solid = onDarkHero ? scrolled : true;
+  const lightOnDark = onDarkHero && !solid;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         solid
           ? "border-b border-gray-200 bg-white/95 text-black backdrop-blur-md"
-          : "bg-transparent text-white"
+          : "border-b border-transparent bg-transparent text-white"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      {lightOnDark && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-black/15 to-transparent"
+        />
+      )}
+
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <Link
           href="/"
-          className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight lg:text-2xl"
+          className="flex items-center gap-2.5 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight lg:text-2xl"
+          aria-label="Bearstow home"
         >
-          Studio
+          <BearLogo variant="icon" size={40} priority className="shrink-0 rounded-[10px]" />
+          <span className="tracking-[0.08em]">BEARSTOW</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
@@ -79,8 +96,16 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <span className="text-xs font-medium text-gray-400">TR</span>
-          <span className="text-xs font-semibold text-black">EN</span>
+          <span
+            className={`text-xs font-medium ${solid ? "text-gray-400" : "text-white/50"}`}
+          >
+            TR
+          </span>
+          <span
+            className={`text-xs font-semibold ${solid ? "text-black" : "text-white"}`}
+          >
+            EN
+          </span>
         </div>
 
         <button
@@ -106,7 +131,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-gray-200 bg-white lg:hidden"
+            className="relative overflow-hidden border-t border-gray-200 bg-white lg:hidden"
           >
             <nav className="flex flex-col gap-1 px-6 py-6">
               {navLinks.map((link) => (

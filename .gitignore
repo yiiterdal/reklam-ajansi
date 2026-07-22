@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local extraction / reference frames (not shipped)
+/public/images/ref-*
+/public/images/480-00-*
+/public/images/open-seq/
+/public/images/ref-v3/
+/public/images/_vidframes/

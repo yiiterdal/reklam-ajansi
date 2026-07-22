@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ServicesMarquee, { ServicesIntro } from "@/components/ServicesMarquee";
 import Process from "@/components/Process";
+import { PageMediaHero } from "@/components/WorkVideoGrid";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -10,17 +12,26 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="bg-white pt-28 lg:pt-36">
-      <section className="px-6 pb-12 lg:px-10">
+    <main className="bg-white">
+      <PageMediaHero
+        label="Our services"
+        title="What we do"
+        description="From brand systems to motion — each craft shows up as work you can feel. See live panels on the home page; process lives here."
+        ctaHref="/portfolio"
+        ctaLabel="See the work"
+      />
+
+      <section className="px-5 pb-8 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-            Our services
-          </p>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-bold text-black lg:text-5xl">
-            What We Do
-          </h1>
+          <Link
+            href="/contact"
+            className="inline-flex rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-80"
+          >
+            Talk to us
+          </Link>
         </div>
       </section>
+
       <ServicesMarquee />
       <ServicesIntro />
       <Process />

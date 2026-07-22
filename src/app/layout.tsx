@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const syne = Syne({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
@@ -18,21 +18,21 @@ const dmSans = DM_Sans({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#1a0f24",
 };
 
 export const metadata: Metadata = {
   title: {
-    default: "Studio | New-Generation Communications Agency",
-    template: "%s | Studio",
+    default: "Bearstow Agency | New-Generation Communications Agency",
+    template: "%s | Bearstow Agency",
   },
   description:
     "A new-generation advertising agency delivering branding, strategy, digital marketing, web design, and integrated communications.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Studio",
-    title: "Studio | New-Generation Communications Agency",
+    siteName: "Bearstow Agency",
+    title: "Bearstow Agency | New-Generation Communications Agency",
     description:
       "Integrated communications across traditional and digital channels — strategy, design, and performance.",
   },
@@ -48,8 +48,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html lang="en" className={`${jakarta.variable} ${syne.variable}`}>
+      <body className="font-body antialiased">{children}</body>
     </html>
   );
 }

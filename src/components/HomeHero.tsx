@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { m, useScroll, useTransform } from "framer-motion";
 import AnimatedVisual from "@/components/AnimatedVisual";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import RevealText from "@/components/RevealText";
 
 export default function HomeHero() {
   const ref = useRef<HTMLElement>(null);
@@ -15,17 +16,17 @@ export default function HomeHero() {
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.55], [0, -80]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.55, 1], [1, 0, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.55, 1], [0, -80, -80]);
 
   return (
     <section
       ref={ref}
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden px-6 pb-16 pt-28 lg:px-10 lg:pb-24"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-[#1a0f24] px-6 pb-16 pt-28 lg:px-10 lg:pb-24"
     >
       <m.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
         <AnimatedVisual
-          src="/images/abstract-fluid-1.png"
+          src="/images/glow-teal-orange.png"
           index={1}
           priority
           sizes="100vw"
@@ -35,14 +36,15 @@ export default function HomeHero() {
           className="absolute inset-0"
           animate={{
             background: [
-              "linear-gradient(135deg, rgba(15,23,42,0.55) 0%, rgba(13,148,136,0.25) 50%, rgba(15,23,42,0.65) 100%)",
-              "linear-gradient(135deg, rgba(15,23,42,0.55) 0%, rgba(234,88,12,0.22) 50%, rgba(15,23,42,0.65) 100%)",
-              "linear-gradient(135deg, rgba(15,23,42,0.55) 0%, rgba(124,58,237,0.22) 50%, rgba(15,23,42,0.65) 100%)",
-              "linear-gradient(135deg, rgba(15,23,42,0.55) 0%, rgba(13,148,136,0.25) 50%, rgba(15,23,42,0.65) 100%)",
+              "linear-gradient(135deg, rgba(26,15,36,0.65) 0%, rgba(139,92,246,0.35) 50%, rgba(26,15,36,0.75) 100%)",
+              "linear-gradient(135deg, rgba(26,15,36,0.65) 0%, rgba(192,38,211,0.3) 50%, rgba(26,15,36,0.75) 100%)",
+              "linear-gradient(135deg, rgba(26,15,36,0.65) 0%, rgba(168,85,247,0.32) 50%, rgba(26,15,36,0.75) 100%)",
+              "linear-gradient(135deg, rgba(26,15,36,0.65) 0%, rgba(139,92,246,0.35) 50%, rgba(26,15,36,0.75) 100%)",
             ],
           }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/35" />
       </m.div>
 
       <ScrollIndicator />
@@ -59,9 +61,13 @@ export default function HomeHero() {
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-white/70">
             New-generation communications agency
           </p>
-          <h1 className="max-w-4xl font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-            A multidisciplinary strategy, marketing, and design agency.
-          </h1>
+          <RevealText
+            as="h1"
+            text="A multidisciplinary strategy, marketing, and design agency."
+            trigger="mount"
+            delay={0.1}
+            className="max-w-4xl font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+          />
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/85 lg:text-xl">
             We combine strategy, design, and technology to accelerate company
             growth and increase brand awareness.

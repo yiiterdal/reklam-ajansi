@@ -4,6 +4,7 @@ import Image from "next/image";
 import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import RevealText from "@/components/RevealText";
 
 type PageHeroProps = {
   label: string;
@@ -47,9 +48,13 @@ export default function PageHero({ label, title, description, image }: PageHeroP
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-cream/70">
               {label}
             </p>
-            <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl leading-tight tracking-tight lg:text-6xl">
-              {title}
-            </h1>
+            <RevealText
+              as="h1"
+              text={title}
+              trigger="mount"
+              delay={0.1}
+              className="mt-4 font-[family-name:var(--font-display)] text-4xl leading-tight tracking-tight lg:text-6xl"
+            />
             {description ? (
               <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/85 lg:text-lg">
                 {description}
@@ -74,9 +79,13 @@ export default function PageHero({ label, title, description, image }: PageHeroP
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-ink-muted">
             {label}
           </p>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl leading-tight text-ink lg:text-6xl">
-            {title}
-          </h1>
+          <RevealText
+            as="h1"
+            text={title}
+            trigger="mount"
+            delay={0.1}
+            className="mt-4 font-[family-name:var(--font-display)] text-4xl leading-tight text-ink lg:text-6xl"
+          />
           {description ? (
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted lg:text-lg">
               {description}

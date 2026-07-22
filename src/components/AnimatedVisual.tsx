@@ -11,6 +11,7 @@ type AnimatedVisualProps = {
   priority?: boolean;
   className?: string;
   sizes?: string;
+  quality?: number;
 };
 
 export default function AnimatedVisual({
@@ -20,11 +21,12 @@ export default function AnimatedVisual({
   priority = false,
   className = "",
   sizes = "(max-width: 640px) 100vw, 50vw",
+  quality = 92,
 }: AnimatedVisualProps) {
   const gradient = gradientForIndex(index);
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`absolute inset-0 overflow-hidden ${className}`}>
       <m.div
         className="absolute inset-0"
         animate={{ scale: [1, 1.12, 1], x: ["0%", "-2%", "0%"], y: ["0%", "1.5%", "0%"] }}
@@ -35,6 +37,7 @@ export default function AnimatedVisual({
           alt={alt}
           fill
           priority={priority}
+          quality={quality}
           className="object-cover"
           sizes={sizes}
         />

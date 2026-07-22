@@ -1,14 +1,25 @@
-const CDN = "https://cdn.prod.website-files.com/67e1418031b0a27e1810015c";
-
 export const images = {
-  hero: `${CDN}/67e6f4ce2080d0f023b5f955_impact%20hero.webp`,
-  texture: `${CDN}/67e2e4c73ba8784080dcb9c5_texture.webp`,
+  hero: "/images/glow-teal-orange.png",
+  texture: "/images/pexels-resourceboy-18541754-cd39271a-ad48-4104-bc27-9109fd0c4791.png",
+  logo: "/images/brand/icon.png",
+  logoHorizontal: "/images/brand/logo-horizontal.png",
+  logoStacked: "/images/brand/logo-stacked.png",
+  logoEmblem: "/images/brand/logo-emblem.png",
+  logoMonogram: "/images/brand/logo-monogram.png",
   themes: {
-    digital: `${CDN}/67e6ee76d8a89683cdb17141_Climate.webp`,
-    brand: `${CDN}/67e6ee76cf9f2e38678c9119_Health.webp`,
-    growth: `${CDN}/67e6ee765b3f983d697d0a9c_People.webp`,
+    digital: "/images/pexels-james-lee-932763-4383963-b9b09fcc-9bc9-4ffb-acba-09fc34270576.png",
+    brand: "/images/abstract-fluid-1.png",
+    growth: "/images/pexels-karola-g-5978601-cd6e9f04-9608-485b-aff8-0af3f78ac61f.png",
   },
   decor: {
+    studio: "/images/pexels-marina-zasorina-7717503-32129c79-4af1-4587-9509-f77fd4d9dcec.png",
+    team: "/images/pexels-ian-panelo-8668767-137d85ce-7e22-4629-81fd-b19ec4cb8d69.png",
+    campaign: "/images/pexels-robert-clark-504241532-20133620-b2b27ad4-3b2c-4571-84d7-cb3603c22bdb.png",
+    lifestyle: "/images/pexels-diva-30593380-a70e6e85-acdc-4ed5-9db3-a3bee00f8425.png",
+    product: "/images/pexels-chris-f-38966-34034146-2ccc6d5a-8bb7-4267-a5ca-bc89dab50621.png",
+    urban: "/images/pexels-matreding-12008049-7ba78aaa-b32a-4fd2-b3b2-1f2d793d506f.png",
+    portrait: "/images/pexels-kseniya-lapteva-93670191-9176085-a98e83e5-2da7-4909-ac3a-52a1fd214673.png",
+    event: "/images/pexels-wal_-172619-2156618639-35993620-c266343d-27bd-47c0-9f69-ad6ebc4d9174.png",
     abstractFluid1: "/images/abstract-fluid-1.png",
     abstractFluid2: "/images/abstract-fluid-2.png",
     aerialTealGold: "/images/aerial-teal-gold.png",

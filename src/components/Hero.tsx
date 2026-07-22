@@ -5,6 +5,8 @@ import Link from "next/link";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import RevealText from "@/components/RevealText";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function Hero() {
   return (
@@ -35,9 +37,14 @@ export default function Hero() {
             id="impact"
             className="font-[family-name:var(--font-display)] text-[clamp(3.5rem,10vw,8rem)] leading-[0.92] tracking-tight"
           >
-            Insight-led
-            <br />
-            <span className="italic">creative impact</span>
+            <RevealText as="span" text="Insight-led" className="block" trigger="mount" />
+            <RevealText
+              as="span"
+              text="creative impact"
+              className="block italic"
+              trigger="mount"
+              delay={0.15}
+            />
           </h1>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-cream/85 lg:text-lg">
             You can have a great product — but without a strong insight, you only
@@ -45,12 +52,14 @@ export default function Hero() {
             center of brand strategy, building work that changes audience
             behavior.
           </p>
-          <Link
-            href="/contact"
-            className="mt-10 inline-block rounded-full bg-cream px-8 py-3.5 text-sm font-semibold text-ink transition-all hover:bg-white"
-          >
-            Start a project
-          </Link>
+          <MagneticButton className="mt-10">
+            <Link
+              href="/contact"
+              className="inline-block rounded-full bg-cream px-8 py-3.5 text-sm font-semibold text-ink transition-all hover:bg-white"
+            >
+              Start a project
+            </Link>
+          </MagneticButton>
         </m.div>
       </div>
 
