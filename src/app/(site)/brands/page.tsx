@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import BrandsVideoHero from "@/components/BrandsVideoHero";
-import BrandsSection from "@/components/BrandsSection";
+import BrandsStudio from "@/components/BrandsStudio";
 
 export const metadata: Metadata = {
   title: "Our Brands",
   description:
-    "Branding, strategy, web design, digital marketing, and social media — brands we partner with.",
+    "Partners we build with — branding, strategy, web, and campaign worlds.",
 };
 
 export default function BrandsPage() {
   return (
     <main className="bg-white">
-      <BrandsVideoHero />
-      <BrandsSection />
+      <BrandsStudio />
     </main>
   );
 }

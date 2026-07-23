@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { m } from "framer-motion";
@@ -59,12 +60,17 @@ export default function CircleGallery() {
 
         <DirtOrbCarousel />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-white via-white/80 to-transparent pb-10 pt-24">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-            <p className="text-sm text-black/45 sm:text-base">Welcome to the bearverse.</p>
-            <p className="mt-2 max-w-md font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
-              A creative ecosystem for real world brands.
-            </p>
+        {/* dirtverse-style: light fade only, copy sits over the ring */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 pb-8 pt-16 sm:pb-10 sm:pt-20">
+          <div className="mx-auto flex max-w-[1600px] items-end justify-between gap-6 px-5 sm:px-8 lg:px-12">
+            <div>
+              <p className="text-sm text-black/50 sm:text-[15px]">
+                Welcome to the bearverse.
+              </p>
+              <p className="mt-1.5 max-w-sm font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-black sm:text-xl">
+                A creative ecosystem for real world brands.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -89,7 +95,7 @@ export default function CircleGallery() {
           id="work"
           className="scroll-mt-24 border-t border-black/5 px-5 py-16 sm:px-8 lg:px-12 lg:py-24"
         >
-          <div className="mx-auto mb-8 flex max-w-7xl items-end justify-between gap-4">
+          <div className="mx-auto mb-8 flex max-w-[1600px] items-end justify-between gap-4">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40">
               Selected works
             </p>
@@ -101,29 +107,119 @@ export default function CircleGallery() {
             </Link>
           </div>
 
-          <div className="mx-auto grid max-w-7xl gap-3 md:grid-cols-12 md:gap-4">
-            {HOME_WORK.map((item) => (
-              <article
-                key={item.src}
-                data-ragged-media
-                className={`group relative overflow-hidden rounded-2xl bg-[#f0f0f0] ${item.span ?? "md:col-span-4"} ${item.aspect}`}
-              >
-                <SlowWorkVideo
-                  src={item.src}
-                  poster={item.poster ?? workPoster(item.src)}
-                  rate={0.45}
-                  className={VIDEO_CLASS}
-                />
-                <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-6">
-                  <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white sm:text-2xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-white/75">{item.subtitle}</p>
+          {/* Layered editorial spread — hero pair + overlapping row */}
+          {(() => {
+            const [lead, side, ...rest] = HOME_WORK;
+            return (
+              <div className="mx-auto max-w-[1600px]">
+                <div className="grid gap-3 md:grid-cols-12 md:gap-4 lg:gap-5">
+                  {lead ? (
+                    <m.article
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.25 }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                      data-ragged-media
+                      className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-8 md:min-h-[52vh] lg:min-h-[58vh]"
+                    >
+                      <div className="relative aspect-video md:absolute md:inset-0 md:aspect-auto">
+                        <SlowWorkVideo
+                          src={lead.src}
+                          poster={lead.poster ?? workPoster(lead.src)}
+                          rate={0.45}
+                          className={VIDEO_CLASS}
+                        />
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-7 lg:p-9">
+                        <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
+                          {lead.title}
+                        </h3>
+                        <p className="mt-1.5 text-sm text-white/75 sm:text-base">
+                          {lead.subtitle}
+                        </p>
+                      </div>
+                    </m.article>
+                  ) : null}
+
+                  {side ? (
+                    <m.article
+                      initial={{ opacity: 0, y: 36 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.25 }}
+                      transition={{
+                        duration: 0.75,
+                        delay: 0.08,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      data-ragged-media
+                      className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 md:mt-16 lg:mt-24"
+                    >
+                      <div className={`relative ${side.aspect}`}>
+                        <SlowWorkVideo
+                          src={side.src}
+                          poster={side.poster ?? workPoster(side.src)}
+                          rate={0.45}
+                          className={VIDEO_CLASS}
+                        />
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-6">
+                        <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white sm:text-2xl">
+                          {side.title}
+                        </h3>
+                        <p className="mt-1 text-sm text-white/75">{side.subtitle}</p>
+                      </div>
+                    </m.article>
+                  ) : null}
                 </div>
-              </article>
-            ))}
-          </div>
+
+                {rest.length > 0 ? (
+                  <div className="relative mt-3 grid gap-3 sm:mt-4 md:mt-5 md:grid-cols-12 md:gap-4 lg:gap-5">
+                    {rest.map((item, i) => (
+                      <m.article
+                        key={item.src}
+                        initial={{ opacity: 0, y: 32 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{
+                          duration: 0.65,
+                          delay: i * 0.07,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        data-ragged-media
+                        className={`group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 ${
+                          i === 1
+                            ? "md:-mt-10 md:z-[1] lg:-mt-16"
+                            : i === 2
+                              ? "md:mt-8 lg:mt-12"
+                              : "md:mt-2"
+                        }`}
+                      >
+                        <div className={`relative ${item.aspect}`}>
+                          <SlowWorkVideo
+                            src={item.src}
+                            poster={item.poster ?? workPoster(item.src)}
+                            rate={0.45}
+                            className={VIDEO_CLASS}
+                          />
+                        </div>
+                        <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-6">
+                          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white sm:text-2xl">
+                            {item.title}
+                          </h3>
+                          <p className="mt-1 text-sm text-white/75">
+                            {item.subtitle}
+                          </p>
+                        </div>
+                      </m.article>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })()}
         </section>
 
         {/* —— Services: all five media panels visible, hover expands —— */}
@@ -160,12 +256,22 @@ export default function CircleGallery() {
                   style={{ flexGrow: active ? 3.2 : 1, flexBasis: 0 }}
                   aria-pressed={active}
                 >
-                  <SlowWorkVideo
-                    src={item.src}
-                    poster={item.poster ?? workPoster(item.src)}
-                    rate={0.45}
-                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                  />
+                  {item.kind === "image" ? (
+                    <Image
+                      src={item.src}
+                      alt={item.subtitle ?? item.title}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 40vw"
+                      className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <SlowWorkVideo
+                      src={item.src}
+                      poster={item.poster ?? workPoster(item.src)}
+                      rate={0.45}
+                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                    />
+                  )}
                   <div
                     className={`pointer-events-none absolute inset-0 z-[6] transition duration-500 ${
                       active
@@ -207,7 +313,7 @@ export default function CircleGallery() {
 
         {/* —— News —— */}
         <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12">
-          <div className="mx-auto mb-10 flex max-w-7xl items-end justify-between">
+          <div className="mx-auto mb-10 flex max-w-[1600px] items-end justify-between">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40">
               In the news
             </p>
@@ -218,14 +324,21 @@ export default function CircleGallery() {
               All Articles
             </Link>
           </div>
-          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-3">
+          <div className="mx-auto grid max-w-[1600px] gap-8 md:grid-cols-12 md:gap-5">
             {HOME_ARTICLES.map((a, i) => (
               <m.article
                 key={a.src}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.06 }}
+                transition={{ duration: 0.55, delay: i * 0.07 }}
+                className={
+                  i === 0
+                    ? "md:col-span-5"
+                    : i === 1
+                      ? "md:col-span-4 md:mt-14"
+                      : "md:col-span-3 md:mt-6"
+                }
               >
                 <div
                   data-ragged-media
@@ -241,7 +354,7 @@ export default function CircleGallery() {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/40">
                   {a.subtitle}
                 </p>
-                <h3 className="mt-2 font-[family-name:var(--font-display)] text-lg font-bold leading-snug tracking-tight">
+                <h3 className="mt-2 font-[family-name:var(--font-display)] text-lg font-bold leading-snug tracking-tight sm:text-xl">
                   {a.title}
                 </h3>
               </m.article>

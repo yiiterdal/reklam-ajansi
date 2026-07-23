@@ -22,7 +22,15 @@ const socialLinks = [
 ];
 
 /** Routes with a dark first viewport — white nav until scroll. */
-const darkTransparentRoutes = new Set(["/", "/about"]);
+const darkTransparentRoutes = new Set([
+  "/",
+  "/about",
+  "/portfolio",
+  "/services",
+  "/visuals",
+  "/contact",
+  "/brands",
+]);
 
 export default function Header() {
   const pathname = usePathname();

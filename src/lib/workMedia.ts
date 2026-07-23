@@ -28,76 +28,77 @@ function withPoster(item: Omit<WorkMedia, "poster"> & { poster?: string }): Work
  * When you drop new images/videos, add them to ONE list only.
  */
 
-/** Home — Selected works */
+/** Home — Selected works (large bento — campaign pieces read better here) */
 export const HOME_WORK: WorkMedia[] = [
   {
-    src: "/videos/works/work-0.mp4",
-    title: "Northline",
-    subtitle: "Launch systems for a product-led brand",
+    src: "/videos/works/work-1080-1.mp4",
+    title: "Add New",
+    subtitle: "Product UI in motion",
     aspect: "aspect-video",
     span: "md:col-span-7",
   },
   {
-    src: "/videos/works/work-720x954.mp4",
-    title: "Pulse",
-    subtitle: "Trust at scale in health",
-    aspect: "aspect-[720/954]",
-    span: "md:col-span-5",
-  },
-  {
-    src: "/videos/works/work-540x960.mp4",
-    title: "SabancıDX",
-    subtitle: "A digital sanctuary for enterprise craft",
-    aspect: "aspect-[9/16]",
-    span: "md:col-span-4",
-  },
-  {
-    src: "/videos/works/work-tatra-v0.mp4",
-    title: "Tatra House",
-    subtitle: "Identity in motion",
-    aspect: "aspect-square",
-    span: "md:col-span-3",
-  },
-  {
-    src: "/videos/works/work-tatra-v0-6.mp4",
-    title: "Tatra House",
-    subtitle: "Mountain capsule world",
-    aspect: "aspect-[16/10]",
-    span: "md:col-span-5",
-  },
-].map(withPoster);
-
-/** Home — Services strip */
-export const HOME_SERVICE_ITEMS: WorkMedia[] = [
-  {
-    src: "/videos/works/work-1080-1.mp4",
-    title: "Brand",
-    subtitle: "Systems & identity",
-    aspect: "aspect-video",
-  },
-  {
     src: "/videos/works/work-v0-1.mp4",
-    title: "Digital",
-    subtitle: "Product & web",
+    title: "Fauna",
+    subtitle: "Editorial collage system",
     aspect: "aspect-[1126/1280]",
+    span: "md:col-span-5",
   },
   {
     src: "/videos/works/work-tatra-v0-1.mp4",
-    title: "Content",
-    subtitle: "Campaign worlds",
+    title: "Knicks 2026",
+    subtitle: "Campaign world",
     aspect: "aspect-square",
+    span: "md:col-span-4",
   },
   {
     src: "/videos/works/work-v0-2.mp4",
-    title: "Motion",
-    subtitle: "Film & loops",
+    title: "Year of the Horse",
+    subtitle: "Cultural cut",
     aspect: "aspect-square",
+    span: "md:col-span-4",
   },
   {
     src: "/videos/works/work-1080-sq.mp4",
+    title: "Digital Age",
+    subtitle: "Print feeling, screen craft",
+    aspect: "aspect-[572/812]",
+    span: "md:col-span-4",
+  },
+].map(withPoster);
+
+/** Home — Services strip (ambient loops for narrow → expand panels) */
+export const HOME_SERVICE_ITEMS: WorkMedia[] = [
+  {
+    src: "/videos/works/work-540x540.mp4",
+    title: "Brand",
+    subtitle: "Systems & identity",
+    aspect: "aspect-square",
+  },
+  {
+    src: "/videos/works/work-v0-6.mp4",
+    title: "Digital",
+    subtitle: "Publish / Play UI",
+    aspect: "aspect-square",
+  },
+  {
+    kind: "image" as const,
+    src: "/images/works/galaxy-traveler.png",
+    title: "Content",
+    subtitle: "Oddsey",
+    aspect: "aspect-[1024/576]",
+  },
+  {
+    src: "/videos/works/work-1280x720.mp4",
+    title: "Motion",
+    subtitle: "Film & loops",
+    aspect: "aspect-video",
+  },
+  {
+    src: "/videos/works/work-1082x720.mp4",
     title: "Print",
     subtitle: "Physical craft",
-    aspect: "aspect-[572/812]",
+    aspect: "aspect-[1082/720]",
   },
 ].map(withPoster);
 
@@ -128,6 +129,41 @@ export const HOME_ARTICLES: WorkMedia[] = [
 
 /** /portfolio only */
 export const PORTFOLIO_WORK: WorkMedia[] = [
+  {
+    src: "/videos/works/work-0.mp4",
+    title: "Northline",
+    subtitle: "Launch systems for a product-led brand",
+    aspect: "aspect-video",
+    span: "md:col-span-7",
+  },
+  {
+    src: "/videos/works/work-720x954.mp4",
+    title: "Pulse",
+    subtitle: "Trust at scale in health",
+    aspect: "aspect-[720/954]",
+    span: "md:col-span-5",
+  },
+  {
+    src: "/videos/works/work-540x960.mp4",
+    title: "SabancıDX",
+    subtitle: "A digital sanctuary for enterprise craft",
+    aspect: "aspect-[9/16]",
+    span: "md:col-span-4",
+  },
+  {
+    src: "/videos/works/work-tatra-v0.mp4",
+    title: "Tatra House",
+    subtitle: "Identity in motion",
+    aspect: "aspect-square",
+    span: "md:col-span-4",
+  },
+  {
+    src: "/videos/works/work-tatra-v0-6.mp4",
+    title: "Tatra House",
+    subtitle: "Mountain capsule world",
+    aspect: "aspect-[16/10]",
+    span: "md:col-span-4",
+  },
   {
     src: "/videos/works/work-1036x1108.mp4",
     title: "Messi 10",
@@ -198,45 +234,38 @@ export const PORTFOLIO_WORK: WorkMedia[] = [
  */
 export const VISUALS_WORK: WorkMedia[] = [
   {
-    kind: "image",
+    kind: "image" as const,
     src: "/images/works/body-wave.png",
     title: "Body Wave",
     subtitle: "Music events branding",
     aspect: "aspect-[720/900]",
   },
   {
-    kind: "image",
-    src: "/images/works/galaxy-traveler.png",
-    title: "galaXy.inc",
-    subtitle: "Traveler identity",
-    aspect: "aspect-[1024/576]",
-  },
-  {
-    kind: "image",
+    kind: "image" as const,
     src: "/images/works/stamp-deer.png",
     title: "Folk Mark",
     subtitle: "Archive study",
     aspect: "aspect-[651/782]",
   },
   {
-    kind: "image",
+    src: "/videos/works/work-v0-8.mp4",
+    title: "Rewind Room",
+    subtitle: "Music nights poster",
+    aspect: "aspect-[760/948]",
+  },
+  {
+    kind: "image" as const,
     src: "/images/works/wild-rendered.png",
     title: "Wild rendered",
     subtitle: "Still life study",
     aspect: "aspect-[1024/801]",
   },
   {
-    kind: "image",
+    kind: "image" as const,
     src: "/images/works/underscores.png",
     title: "underscores",
     subtitle: "Editorial portrait",
     aspect: "aspect-[768/1024]",
-  },
-  {
-    src: "/videos/works/work-v0-6.mp4",
-    title: "Orbit Loop",
-    subtitle: "Square motion",
-    aspect: "aspect-square",
   },
   {
     src: "/videos/works/work-1148x720.mp4",
@@ -255,30 +284,6 @@ export const VISUALS_WORK: WorkMedia[] = [
     title: "Square Signal",
     subtitle: "Social system",
     aspect: "aspect-square",
-  },
-  {
-    src: "/videos/works/work-1280x720.mp4",
-    title: "Horizon",
-    subtitle: "Brand film cut",
-    aspect: "aspect-video",
-  },
-  {
-    src: "/videos/works/work-540x540.mp4",
-    title: "Pocket Mark",
-    subtitle: "Icon motion",
-    aspect: "aspect-square",
-  },
-  {
-    src: "/videos/works/work-1082x720.mp4",
-    title: "Field Line",
-    subtitle: "Wide stills",
-    aspect: "aspect-[1082/720]",
-  },
-  {
-    src: "/videos/works/work-v0-8.mp4",
-    title: "Capsule",
-    subtitle: "Portrait loop",
-    aspect: "aspect-[760/948]",
   },
   {
     src: "/videos/works/work-v0-9.mp4",

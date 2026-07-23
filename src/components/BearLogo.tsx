@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 const variants = {
-  icon: { src: "/images/brand/icon.png?v=2", ratio: 1 },
+  icon: { src: "/images/brand/icon.png", ratio: 1 },
   horizontal: { src: "/images/brand/logo-horizontal.png", ratio: 1200 / 390 },
   stacked: { src: "/images/brand/logo-stacked.png", ratio: 777 / 900 },
   emblem: { src: "/images/brand/logo-emblem.png", ratio: 900 / 828 },

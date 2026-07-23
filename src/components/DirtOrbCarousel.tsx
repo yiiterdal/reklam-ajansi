@@ -10,8 +10,10 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
- * dirtverse.co Section Carousel — true CSS 3D ring:
- * perspective 800 · radius 800 · ball ~533 · mouse tilt ±5°/±3° · drag · bob
+ * dirtverse.co Section Carousel — CSS 3D ring (live Framer props):
+ * ballSize 800 · perspective 800 · radius 800 · lockBallSize
+ * effective ball = 800 * (perspective/1200) ≈ 533 @ desktop
+ * 10 faces (5 orbs × 2) · mouse tilt ±5°/±3° · drag 0.5 · bob -10px
  */
 
 const ORBS = [
@@ -42,10 +44,10 @@ const ORBS = [
   },
 ] as const;
 
+/** Same as dirtverse: 5 unique + 5 duplicate = 10 faces on the ring */
 const ITEMS = [...ORBS, ...ORBS];
 const ANGLE_STEP = 360 / ITEMS.length;
 
-/** Live dirtverse desktop values (from SSR / Framer component). */
 const DIRT = {
   radius: 800,
   perspective: 800,
@@ -61,16 +63,25 @@ type Layout = {
   ball: number;
 };
 
-function measureLayout(w: number): Layout {
-  // Scale the dirtverse desktop pack (~1440-wide) down on smaller viewports.
-  const scale = Math.min(1.15, Math.max(0.42, w / 1440));
+/**
+ * Match the reference frame: edge orbs ~55–60% of viewport height,
+ * heavily cropped left/right — dirtverse effective ball ≈ 533 @ 1440×900.
+ */
+function measureLayout(w: number, h: number): Layout {
+  const baseBall = DIRT.ballSize * (DIRT.perspective / 1200); // ≈533.3
+  const targetByH = h * 0.58;
+  const targetByW = w * 0.37;
+  const target = Math.min(targetByH, targetByW);
+  const scale = Math.max(0.55, Math.min(1.4, target / baseBall));
+
   const perspective = Math.round(DIRT.perspective * scale);
   const radius = Math.round(DIRT.radius * scale);
+  // lockBallSize formula from dirtverse source
   const ball = Math.round(DIRT.ballSize * Math.max(0.2, perspective / 1200));
   return { radius, perspective, ball };
 }
 
-const DEFAULT_LAYOUT = measureLayout(1440);
+const DEFAULT_LAYOUT = measureLayout(1440, 900);
 
 function OrbFace({
   orb,
@@ -196,8 +207,7 @@ export default function DirtOrbCarousel() {
   useEffect(() => {
     const onResize = () => {
       rectRef.current = null;
-      const next = measureLayout(window.innerWidth);
-      setLayout(next);
+      setLayout(measureLayout(window.innerWidth, window.innerHeight));
     };
     onResize();
     window.addEventListener("resize", onResize);
@@ -205,8 +215,8 @@ export default function DirtOrbCarousel() {
   }, []);
 
   useEffect(() => {
-    // Match dirtverse entry once: start expanded (r*1.8 @ rotateY 270), settle to r @ 180.
-    const r = measureLayout(window.innerWidth).radius;
+    // dirtverse entry: start expanded (r*1.8 @ rotateY 270), settle to r @ 180
+    const { radius: r } = measureLayout(window.innerWidth, window.innerHeight);
     radiusTarget.set(r * 1.8);
     rotation.set(270);
     const t0 = window.setTimeout(() => {
@@ -220,7 +230,6 @@ export default function DirtOrbCarousel() {
     };
   }, [radiusTarget, rotation]);
 
-  // Keep radius spring in sync when layout changes after entry.
   useEffect(() => {
     if (!ready) return;
     radiusTarget.set(layout.radius);
@@ -271,7 +280,6 @@ export default function DirtOrbCarousel() {
           rect = root.getBoundingClientRect();
           rectRef.current = rect;
         }
-        // dirtverse: rotateX ±5°, rotateY ±3° from cursor in container
         const ny = (cy - rect.top) / rect.height;
         const nx = (cx - rect.left) / rect.width;
         tiltX.set(-(ny * 2 - 1) * DIRT.tiltX);
@@ -315,7 +323,7 @@ export default function DirtOrbCarousel() {
   return (
     <div
       ref={rootRef}
-      className="dirt-orb-carousel relative h-[90vh] w-full select-none sm:h-screen"
+      className="dirt-orb-carousel relative h-[100svh] w-full select-none"
       style={{
         backgroundColor: "#ffffff",
         overflow: "hidden",
@@ -340,7 +348,6 @@ export default function DirtOrbCarousel() {
         }
       `}</style>
 
-      {/* Mouse tilt layer (rotateX / rotateY) */}
       <motion.div
         style={{
           position: "absolute",
@@ -351,7 +358,6 @@ export default function DirtOrbCarousel() {
           rotateY: tiltYSmooth,
         }}
       >
-        {/* Ball stage centered */}
         <div
           style={{
             position: "absolute",
@@ -364,7 +370,6 @@ export default function DirtOrbCarousel() {
             transformStyle: "preserve-3d",
           }}
         >
-          {/* Drag rotation ring */}
           <motion.div
             style={{
               position: "absolute",
