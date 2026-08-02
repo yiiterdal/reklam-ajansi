@@ -8,7 +8,7 @@ import { workPoster } from "@/lib/workMedia";
 
 export default function ContactStudio() {
   return (
-    <div className="bg-[#1c1c1c]">
+    <div className="bg-white">
       <section className="relative min-h-[70svh] overflow-hidden bg-[#0e0e0e] text-white lg:min-h-[78svh]">
         <div className="absolute inset-0">
           <SlowWorkVideo

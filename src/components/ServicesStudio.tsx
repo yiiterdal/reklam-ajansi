@@ -33,7 +33,7 @@ const DETAIL = [
 
 export default function ServicesStudio() {
   return (
-    <div className="bg-[#1c1c1c]">
+    <div className="bg-white">
       <StudioMediaHero
         label="Our services"
         title="Craft across every surface."
@@ -45,7 +45,7 @@ export default function ServicesStudio() {
 
       <section className="px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto mb-10 max-w-[1600px]">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/35">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
             Capabilities
           </p>
           <h2 className="mt-3 max-w-xl font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
@@ -100,7 +100,7 @@ export default function ServicesStudio() {
         <div className="mx-auto mt-12 max-w-[1600px]">
           <Link
             href="/contact"
-            className="inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:opacity-90"
+            className="inline-flex rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-80"
           >
             Talk to us
           </Link>

@@ -18,7 +18,7 @@ export default function PortfolioStudio({ items }: Props) {
   const [lead, second, ...rest] = items;
 
   return (
-    <div className="bg-[#1c1c1c]">
+    <div className="bg-white">
       <StudioMediaHero
         label="Selected work"
         title="Work that moves."
@@ -32,7 +32,7 @@ export default function PortfolioStudio({ items }: Props) {
       <section className="px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto mb-10 flex max-w-[1600px] items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/35">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
               Studio archive
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
@@ -41,7 +41,7 @@ export default function PortfolioStudio({ items }: Props) {
           </div>
           <Link
             href="/visuals"
-            className="hidden text-sm font-medium text-white/50 underline-offset-4 hover:text-[#f2f2f2] hover:underline sm:inline"
+            className="hidden text-sm font-medium text-black/50 underline-offset-4 hover:text-black hover:underline sm:inline"
           >
             Visual library
           </Link>
@@ -52,7 +52,7 @@ export default function PortfolioStudio({ items }: Props) {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative mx-auto mb-5 max-w-[1600px] overflow-hidden rounded-2xl bg-[#2a2a2a]"
+            className="relative mx-auto mb-5 max-w-[1600px] overflow-hidden rounded-2xl bg-[#ececec]"
           >
             <div className="relative aspect-[16/9] md:aspect-[21/9]">
               <SlowWorkVideo
@@ -82,7 +82,7 @@ export default function PortfolioStudio({ items }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % 6) * 0.04 }}
-              className={`group relative overflow-hidden rounded-2xl bg-[#2a2a2a] ${
+              className={`group relative overflow-hidden rounded-2xl bg-[#ececec] ${
                 item.span ?? "md:col-span-4"
               } ${item.aspect} ${
                 i % 5 === 1

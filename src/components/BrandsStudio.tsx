@@ -27,7 +27,7 @@ const MOMENTS = [
 
 export default function BrandsStudio() {
   return (
-    <div className="bg-[#1c1c1c]">
+    <div className="bg-white">
       <StudioMediaHero
         label="Our brands"
         title="Partners we build with."
@@ -39,7 +39,7 @@ export default function BrandsStudio() {
 
       <section className="px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="mx-auto mb-10 max-w-[1600px]">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/35">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
             Recent energy
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
@@ -77,7 +77,7 @@ export default function BrandsStudio() {
         <div className="mx-auto mt-10 max-w-[1600px]">
           <Link
             href="/portfolio"
-            className="text-sm font-medium text-white/55 underline-offset-4 hover:text-[#f2f2f2] hover:underline"
+            className="text-sm font-medium text-black/55 underline-offset-4 hover:text-black hover:underline"
           >
             See all work
           </Link>

@@ -17,12 +17,12 @@ export default function ServicesMarquee() {
   const loop = [...tags, ...tags];
 
   return (
-    <section className="overflow-hidden border-y border-white/10 bg-[#1c1c1c] py-8">
+    <section className="overflow-hidden border-y border-gray-200 bg-white py-8">
       <div className="animate-marquee flex w-max gap-8 px-4">
         {loop.map((tag, i) => (
           <span
             key={`${tag}-${i}`}
-            className="shrink-0 font-[family-name:var(--font-display)] text-sm font-semibold tracking-wide text-[#f2f2f2] lg:text-base"
+            className="shrink-0 font-[family-name:var(--font-display)] text-sm font-semibold tracking-wide text-black lg:text-base"
           >
             {tag}
           </span>
@@ -34,7 +34,7 @@ export default function ServicesMarquee() {
 
 export function ServicesIntro() {
   return (
-    <section className="bg-[#1c1c1c] px-6 py-20 lg:px-10 lg:py-28">
+    <section className="bg-white px-6 py-20 lg:px-10 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <m.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,7 @@ export function ServicesIntro() {
           viewport={{ once: true }}
           className="max-w-3xl"
         >
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-[#f2f2f2] lg:text-4xl">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-black lg:text-4xl">
             What We Do
           </h2>
         </m.div>
@@ -53,12 +53,12 @@ export function ServicesIntro() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-snug text-[#f2f2f2] lg:text-3xl">
+            <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-snug text-black lg:text-3xl">
               Branding & Strategy
               <br />
               Development
             </h3>
-            <p className="mt-5 text-base leading-relaxed text-white/55">
+            <p className="mt-5 text-base leading-relaxed text-gray-600">
               Our methodology is built on identifying the elements that respond
               to consumer behavior and needs — forming the foundation of an
               actionable strategy.
@@ -71,12 +71,12 @@ export function ServicesIntro() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-snug text-[#f2f2f2] lg:text-3xl">
+            <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-snug text-black lg:text-3xl">
               Digital Marketing &
               <br />
               E-commerce Management
             </h3>
-            <p className="mt-5 text-base leading-relaxed text-white/55">
+            <p className="mt-5 text-base leading-relaxed text-gray-600">
               We increase your brand visibility across digital channels, manage
               your e-commerce infrastructure, and accelerate growth through
               performance-driven campaigns.
@@ -92,7 +92,7 @@ export function ServicesIntro() {
         >
           <Link
             href="/about"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#f2f2f2] transition-opacity hover:opacity-60"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-black transition-opacity hover:opacity-60"
           >
             Get to know us
             <span>→</span>

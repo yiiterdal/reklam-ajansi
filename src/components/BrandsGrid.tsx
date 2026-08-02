@@ -25,24 +25,24 @@ export default function BrandsGrid({ brands }: BrandsGridProps) {
         >
           <Link href={`/brands/${brand.slug}`} className="block">
             <TiltCard className="relative aspect-[29/18]">
-              <div className="relative h-full w-full overflow-hidden rounded-sm bg-[#2a2a2a]">
+              <div className="relative h-full w-full overflow-hidden rounded-sm bg-gray-100">
                 <AnimatedVisual
                   src={visualForIndex(i)}
                   alt=""
                   index={i}
                   priority={i < 2}
                 />
-                <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/25" />
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/15" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </div>
             </TiltCard>
             <div className="px-1 pt-5 sm:px-2">
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold uppercase tracking-wide text-[#f2f2f2] transition-opacity group-hover:opacity-80 lg:text-2xl">
+              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold uppercase tracking-wide text-black transition-colors group-hover:text-accent lg:text-2xl">
                 {brand.name}
               </h3>
               <ul className="mt-3 space-y-0.5">
                 {brand.services.map((service) => (
-                  <li key={service} className="text-sm text-white/50">
+                  <li key={service} className="text-sm text-gray-600">
                     {service}
                   </li>
                 ))}

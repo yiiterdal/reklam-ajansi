@@ -6,7 +6,6 @@ import {
   m,
   useMotionValue,
   useScroll,
-  useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
@@ -196,25 +195,16 @@ export default function TopologyHeroIntro() {
   const [play, setPlay] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Longer journey = gentler scrub per wheel tick (100dvh hold + 560dvh path)
-  const HOLD_DVH = 100;
-  const JOURNEY_DVH = 560;
-  const SECTION_DVH = HOLD_DVH + JOURNEY_DVH; // 660
-
+  // Scroll over the whole section: 100dvh hold + 450dvh journey
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
-  const journeyRaw = useTransform(scrollYProgress, (p) => {
-    const scrolled = p * SECTION_DVH;
-    return Math.min(1, Math.max(0, (scrolled - HOLD_DVH) / JOURNEY_DVH));
-  });
-  // Soft spring ahead of WebGL lerp — kills wheel stutter before the camera
-  const journeyProgress = useSpring(journeyRaw, {
-    stiffness: 42,
-    damping: 28,
-    mass: 0.55,
-    restDelta: 0.0005,
+  // raw journey progress (their ScrollTrigger scrub target)
+  const journeyProgress = useTransform(scrollYProgress, (p) => {
+    // section scrollable span = 550dvh: first 100dvh is the hold
+    const scrolled = p * 550;
+    return Math.min(1, Math.max(0, (scrolled - 100) / 450));
   });
   // lerped theatre sequence position, written each frame by the canvas
   const seq = useMotionValue(SEQ_HERO);
@@ -250,7 +240,7 @@ export default function TopologyHeroIntro() {
     <section
       ref={sectionRef}
       className={`${manrope.className} relative bg-[#151515] text-white`}
-      style={{ height: `${SECTION_DVH}dvh` }}
+      style={{ height: "650dvh" }}
       data-play={play ? "true" : "false"}
     >
       <div className="sticky top-0 h-[100dvh] overflow-hidden">

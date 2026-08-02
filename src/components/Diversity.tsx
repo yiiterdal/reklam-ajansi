@@ -24,7 +24,7 @@ const principles = [
 
 export default function Diversity() {
   return (
-    <section className="border-t border-white/10 bg-black py-20 text-white lg:py-28">
+    <section className="border-t border-gray-200 bg-black py-20 text-white lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <m.div
           initial={{ opacity: 0, y: 20 }}

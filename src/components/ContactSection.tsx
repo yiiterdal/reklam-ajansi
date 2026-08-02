@@ -12,47 +12,34 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !message) return;
-    const subject = encodeURIComponent(
-      name ? `Project enquiry — ${name}` : "Project enquiry",
-    );
-    const body = encodeURIComponent(
-      `${message}\n\n—\n${name || "—"}\n${email}`,
-    );
-    window.location.href = `mailto:hello@bearstow.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    if (email && message) setSubmitted(true);
   };
 
   return (
-    <section className="border-t border-white/10 bg-[#1c1c1c] py-16 lg:py-24">
+    <section className="border-t border-gray-200 bg-white py-16 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
         <div>
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-[#f2f2f2] lg:text-4xl">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-black lg:text-4xl">
             Tell us about your project
           </h2>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/55 lg:text-base">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-600 lg:text-base">
             Brand launch, integrated campaign, or digital transformation — tell
             us your goals. We deliver creative solutions across ATL, BTL, and
             digital channels.
           </p>
-          <div className="mt-10 space-y-4 text-sm text-white/55">
+          <div className="mt-10 space-y-4 text-sm text-gray-600">
             <p>
-              <span className="font-semibold text-[#f2f2f2]">Email</span>
+              <span className="font-semibold text-black">Email</span>
               <br />
-              <a
-                href="mailto:hello@bearstow.com"
-                className="transition hover:text-white"
-              >
-                hello@bearstow.com
-              </a>
+              hello@bearstow.agency
             </p>
             <p>
-              <span className="font-semibold text-[#f2f2f2]">Phone</span>
+              <span className="font-semibold text-black">Phone</span>
               <br />
               +90 212 213 65 55
             </p>
             <p>
-              <span className="font-semibold text-[#f2f2f2]">Address</span>
+              <span className="font-semibold text-black">Address</span>
               <br />
               19 Mayis Cad. UBM Plaza, Sisli / Istanbul
             </p>
@@ -61,13 +48,13 @@ export default function ContactSection() {
 
         <div>
           {submitted ? (
-            <p className="text-lg text-[#f2f2f2]">Thank you! We&apos;ll be in touch soon.</p>
+            <p className="text-lg text-black">Thank you! We&apos;ll be in touch soon.</p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
-                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white/45"
+                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-500"
                 >
                   Name
                 </label>
@@ -76,13 +63,13 @@ export default function ContactSection() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full border-b border-white/15 bg-transparent py-2 text-sm text-white outline-none focus:border-white/50"
+                  className="w-full border-b border-gray-300 bg-transparent py-2 text-sm outline-none focus:border-black"
                 />
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white/45"
+                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-500"
                 >
                   Email
                 </label>
@@ -92,13 +79,13 @@ export default function ContactSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full border-b border-white/15 bg-transparent py-2 text-sm text-white outline-none focus:border-white/50"
+                  className="w-full border-b border-gray-300 bg-transparent py-2 text-sm outline-none focus:border-black"
                 />
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white/45"
+                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-500"
                 >
                   Message
                 </label>
@@ -108,13 +95,13 @@ export default function ContactSection() {
                   onChange={(e) => setMessage(e.target.value)}
                   required
                   rows={5}
-                  className="w-full resize-none border-b border-white/15 bg-transparent py-2 text-sm text-white outline-none focus:border-white/50"
+                  className="w-full resize-none border-b border-gray-300 bg-transparent py-2 text-sm outline-none focus:border-black"
                 />
               </div>
               <MagneticButton>
                 <button
                   type="submit"
-                  className="bg-white px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-black transition-colors hover:bg-white/85"
+                  className="bg-black px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-gray-800"
                 >
                   Send
                 </button>

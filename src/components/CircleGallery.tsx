@@ -27,18 +27,47 @@ export default function CircleGallery() {
   const [activeService, setActiveService] = useState(2);
 
   return (
-    <div className="bg-[#1c1c1c] text-[#f2f2f2]">
-      {/* —— Hero: Dirt-style 3D orb cylinder (global Header handles nav) —— */}
+    <div className="bg-white text-black">
+      {/* —— Hero: Dirt-style 3D orb cylinder —— */}
       <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 mx-auto flex max-w-7xl items-center justify-between px-5 pt-6 sm:px-8 lg:px-12">
+          <nav className="pointer-events-auto flex items-center gap-2">
+            {[
+              { label: "About", href: "/about" },
+              { label: "Work", href: "/portfolio" },
+              { label: "Services", href: "/services" },
+              { label: "News", href: "/visuals" },
+            ].map((l) => (
+              <Link
+                key={l.label}
+                href={l.href}
+                className="rounded-full bg-[#ececec]/90 px-3.5 py-2 text-sm font-medium text-black/75 backdrop-blur-sm transition hover:bg-[#e0e0e0] sm:px-4"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <p className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
+            bearstow
+          </p>
+          <Link
+            href="/contact"
+            className="pointer-events-auto rounded-full bg-black px-4 py-2 text-sm font-medium text-white sm:px-5 sm:py-2.5"
+          >
+            Contact
+          </Link>
+        </div>
+
         <DirtOrbCarousel />
 
+        {/* dirtverse-style: light fade only, copy sits over the ring */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 pb-8 pt-16 sm:pb-10 sm:pt-20">
           <div className="mx-auto flex max-w-[1600px] items-end justify-between gap-6 px-5 sm:px-8 lg:px-12">
             <div>
-              <p className="text-sm text-white/50 sm:text-[15px]">
+              <p className="text-sm text-black/50 sm:text-[15px]">
                 Welcome to the bearverse.
               </p>
-              <p className="mt-1.5 max-w-sm font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white sm:text-xl">
+              <p className="mt-1.5 max-w-sm font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-black sm:text-xl">
                 A creative ecosystem for real world brands.
               </p>
             </div>
@@ -47,9 +76,9 @@ export default function CircleGallery() {
       </section>
 
       {/* —— About line —— */}
-      <section className="border-t border-white/10 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40 lg:col-span-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40 lg:col-span-2">
             About
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.15] tracking-tight lg:col-span-10">
@@ -64,15 +93,15 @@ export default function CircleGallery() {
         {/* —— Selected works —— */}
         <section
           id="work"
-          className="scroll-mt-24 border-t border-white/10 px-5 py-16 sm:px-8 lg:px-12 lg:py-24"
+          className="scroll-mt-24 border-t border-black/5 px-5 py-16 sm:px-8 lg:px-12 lg:py-24"
         >
           <div className="mx-auto mb-8 flex max-w-[1600px] items-end justify-between gap-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40">
               Selected works
             </p>
             <Link
               href="/portfolio"
-              className="text-sm font-medium text-white/55 underline-offset-4 transition hover:text-white hover:underline"
+              className="text-sm font-medium text-black/55 underline-offset-4 transition hover:text-black hover:underline"
             >
               See All Work
             </Link>
@@ -91,7 +120,7 @@ export default function CircleGallery() {
                       viewport={{ once: true, amount: 0.25 }}
                       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                       data-ragged-media
-                      className="group relative overflow-hidden rounded-2xl bg-[#2a2a2a] md:col-span-8 md:min-h-[52vh] lg:min-h-[58vh]"
+                      className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-8 md:min-h-[52vh] lg:min-h-[58vh]"
                     >
                       <div className="relative aspect-video md:absolute md:inset-0 md:aspect-auto">
                         <SlowWorkVideo
@@ -124,7 +153,7 @@ export default function CircleGallery() {
                         ease: [0.22, 1, 0.36, 1],
                       }}
                       data-ragged-media
-                      className="group relative overflow-hidden rounded-2xl bg-[#2a2a2a] md:col-span-4 md:mt-16 lg:mt-24"
+                      className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 md:mt-16 lg:mt-24"
                     >
                       <div className={`relative ${side.aspect}`}>
                         <SlowWorkVideo
@@ -159,7 +188,7 @@ export default function CircleGallery() {
                           ease: [0.22, 1, 0.36, 1],
                         }}
                         data-ragged-media
-                        className={`group relative overflow-hidden rounded-2xl bg-[#2a2a2a] md:col-span-4 ${
+                        className={`group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 ${
                           i === 1
                             ? "md:-mt-10 md:z-[1] lg:-mt-16"
                             : i === 2
@@ -194,14 +223,14 @@ export default function CircleGallery() {
         </section>
 
         {/* —— Services: all five media panels visible, hover expands —— */}
-        <section className="border-t border-white/10 px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <section className="border-t border-black/5 px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
           <div className="mx-auto mb-8 flex max-w-[1600px] items-end justify-between gap-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40">
               Services
             </p>
             <Link
               href="/services"
-              className="rounded-full bg-[#2a2a2a] px-5 py-2.5 text-sm font-medium text-white/70 transition hover:bg-[#333]"
+              className="rounded-full bg-[#ececec] px-5 py-2.5 text-sm font-medium text-black/70 transition hover:bg-[#e0e0e0]"
             >
               See More
             </Link>
@@ -221,7 +250,7 @@ export default function CircleGallery() {
                   data-ragged-media
                   onMouseEnter={() => setActiveService(i)}
                   onFocus={() => setActiveService(i)}
-                  className={`group relative min-h-[220px] min-w-0 overflow-hidden rounded-2xl bg-[#2a2a2a] text-left transition-[flex-grow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-0 ${
+                  className={`group relative min-h-[220px] min-w-0 overflow-hidden rounded-2xl bg-[#f0f0f0] text-left transition-[flex-grow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-0 ${
                     i === 4 ? "col-span-2 md:col-span-1" : ""
                   }`}
                   style={{ flexGrow: active ? 3.2 : 1, flexBasis: 0 }}
@@ -283,14 +312,14 @@ export default function CircleGallery() {
         </section>
 
         {/* —— News —— */}
-        <section className="border-t border-white/10 px-5 py-20 sm:px-8 lg:px-12">
+        <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12">
           <div className="mx-auto mb-10 flex max-w-[1600px] items-end justify-between">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40">
               In the news
             </p>
             <Link
               href="/about"
-              className="rounded-full bg-[#2a2a2a] px-4 py-2 text-sm font-medium text-white/70"
+              className="rounded-full bg-[#ececec] px-4 py-2 text-sm font-medium text-black/70"
             >
               All Articles
             </Link>
@@ -313,7 +342,7 @@ export default function CircleGallery() {
               >
                 <div
                   data-ragged-media
-                  className={`relative mb-4 overflow-hidden rounded-2xl bg-[#2a2a2a] ${a.aspect}`}
+                  className={`relative mb-4 overflow-hidden rounded-2xl bg-[#f0f0f0] ${a.aspect}`}
                 >
                   <SlowWorkVideo
                     src={a.src}
@@ -322,7 +351,7 @@ export default function CircleGallery() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/40">
                   {a.subtitle}
                 </p>
                 <h3 className="mt-2 font-[family-name:var(--font-display)] text-lg font-bold leading-snug tracking-tight sm:text-xl">
@@ -338,7 +367,7 @@ export default function CircleGallery() {
       <EnquiryClose />
 
       {/* —— Contact —— */}
-      <section className="border-t border-white/10 px-5 py-20 sm:px-8 lg:px-12">
+      <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12">
         <m.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -346,7 +375,7 @@ export default function CircleGallery() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-7xl"
         >
-          <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-white/50">
+          <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-black/50">
             contact
           </p>
           <a
@@ -364,7 +393,7 @@ export default function CircleGallery() {
       {/* —— Glass wordmark: dirtverse-scale (oversized letters, cropped sides) —— */}
       <section
         id="wordmark"
-        className="relative h-[100dvh] w-full overflow-hidden bg-[#1c1c1c]"
+        className="relative h-[100dvh] w-full overflow-hidden bg-white"
       >
         <WaterRippleWordmark
           src="/images/bearstow-glass-wordmark.png"
@@ -375,17 +404,17 @@ export default function CircleGallery() {
       </section>
 
       {/* —— Footer (dirtverse layout) —— */}
-      <footer className="border-t border-white/10 px-5 pb-10 pt-8 sm:px-8 lg:px-12">
+      <footer className="border-t border-black/5 px-5 pb-10 pt-8 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-3">
           <div>
-            <p className="font-mono text-[13px] text-white/45">©2026 Bearstow</p>
+            <p className="font-mono text-[13px] text-black/45">©2026 Bearstow</p>
           </div>
           <div>
-            <p className="font-mono text-[13px] uppercase text-white/45">Follow</p>
+            <p className="font-mono text-[13px] uppercase text-black/45">Follow</p>
             <ul className="mt-3 space-y-1.5">
               {["Instagram", "Tiktok", "Pinterest"].map((s) => (
                 <li key={s}>
-                  <a href="#" className="text-[13px] text-white/80 transition hover:opacity-50">
+                  <a href="#" className="text-[13px] text-black/80 transition hover:opacity-50">
                     {s}
                   </a>
                 </li>
@@ -393,22 +422,22 @@ export default function CircleGallery() {
             </ul>
           </div>
           <div>
-            <p className="font-mono text-[13px] uppercase text-white/45">Contact</p>
+            <p className="font-mono text-[13px] uppercase text-black/45">Contact</p>
             <a
               href="mailto:hello@bearstow.com"
-              className="mt-3 block text-[13px] text-white/80 transition hover:opacity-50"
+              className="mt-3 block text-[13px] text-black/80 transition hover:opacity-50"
             >
               hello@bearstow.com
             </a>
-            <p className="mt-6 font-mono text-[13px] uppercase text-white/45">Legal</p>
+            <p className="mt-6 font-mono text-[13px] uppercase text-black/45">Legal</p>
             <ul className="mt-3 space-y-1.5">
               <li>
-                <Link href="/about" className="text-[13px] text-white/80 hover:opacity-50">
+                <Link href="/about" className="text-[13px] text-black/80 hover:opacity-50">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-[13px] text-white/80 hover:opacity-50">
+                <Link href="/about" className="text-[13px] text-black/80 hover:opacity-50">
                   Terms &amp; Conditions
                 </Link>
               </li>
@@ -433,12 +462,12 @@ function EnquiryClose() {
   };
 
   const field =
-    "w-full rounded-lg border-0 bg-[#2a2a2a] px-3 py-[11px] text-sm font-medium text-white outline-none placeholder:text-white/40 focus:ring-1 focus:ring-white/15";
+    "w-full rounded-lg border-0 bg-[#f7f7f7] px-3 py-[11px] text-sm font-medium text-black outline-none placeholder:text-black/40 focus:ring-1 focus:ring-black/10";
 
   return (
     <section
       id="enquiry"
-      className="scroll-mt-24 border-t border-white/10 px-5 py-20 sm:px-8 lg:px-12 lg:py-28"
+      className="scroll-mt-24 border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-28"
     >
       <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-12 lg:gap-20">
         <m.div
@@ -448,10 +477,10 @@ function EnquiryClose() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-6"
         >
-          <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-white/50">
+          <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-black/50">
             It starts at the edge
           </p>
-          <p className="mt-8 font-[family-name:var(--font-display)] text-[clamp(1.35rem,2.6vw,2.05rem)] font-bold leading-[1.3] tracking-tight text-white">
+          <p className="mt-8 font-[family-name:var(--font-display)] text-[clamp(1.35rem,2.6vw,2.05rem)] font-bold leading-[1.3] tracking-tight text-black">
             You&apos;re onto something, and you need work people can&apos;t ignore.
             Built like a swiss army knife, we&apos;ve spent over 30 collective years
             getting this good at what we do. If you&apos;re all in on what you&apos;re
@@ -466,7 +495,7 @@ function EnquiryClose() {
           transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-6"
         >
-          <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-white/50">
+          <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-black/50">
             Make an enquiry
           </p>
 
@@ -518,7 +547,7 @@ function EnquiryClose() {
               </label>
               <button
                 type="submit"
-                className="w-full rounded-lg bg-[#2a2a2a] px-3 py-[11px] text-sm font-semibold text-white transition hover:bg-[#333]"
+                className="w-full rounded-lg bg-[#f7f7f7] px-3 py-[11px] text-sm font-semibold text-black transition hover:bg-[#efefef]"
               >
                 Submit
               </button>
