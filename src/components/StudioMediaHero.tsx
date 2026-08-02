@@ -38,7 +38,7 @@ export default function StudioMediaHero({
   return (
     <section
       className={`relative min-h-[88svh] overflow-hidden ${
-        dark ? "bg-[#0e0e0e] text-white" : "bg-[#f3f3f3] text-black"
+        dark ? "bg-[#0e0e0e] text-white" : "bg-[#262626] text-[#f2f2f2]"
       }`}
     >
       {videoSrc ? (
@@ -81,7 +81,7 @@ export default function StudioMediaHero({
       <div className="relative mx-auto flex min-h-[88svh] max-w-[1600px] flex-col justify-end px-5 pb-14 pt-28 sm:px-8 lg:px-12 lg:pb-20 lg:pt-32">
         <p
           className={`text-xs font-semibold uppercase tracking-[0.28em] ${
-            dark ? "text-white/50" : "text-black/40"
+            dark ? "text-white/50" : "text-white/40"
           }`}
         >
           {label}
@@ -91,7 +91,7 @@ export default function StudioMediaHero({
         </h1>
         <p
           className={`mt-6 max-w-xl text-base leading-relaxed sm:text-lg ${
-            dark ? "text-white/70" : "text-black/55"
+            dark ? "text-white/70" : "text-white/55"
           }`}
         >
           {description}
@@ -101,7 +101,7 @@ export default function StudioMediaHero({
             href={ctaHref}
             className={`mt-9 inline-flex w-fit rounded-full px-5 py-2.5 text-sm font-medium transition ${
               dark
-                ? "bg-white text-black hover:opacity-90"
+                ? "bg-[#1c1c1c] text-[#f2f2f2] hover:opacity-90"
                 : "bg-black text-white hover:opacity-80"
             }`}
           >

@@ -21,20 +21,22 @@ const socialLinks = [
   { label: "YouTube", href: "https://youtube.com" },
 ];
 
-/** Routes with a dark first viewport — white nav until scroll. */
-const darkTransparentRoutes = new Set([
-  "/",
-  "/about",
-  "/portfolio",
-  "/services",
-  "/visuals",
-  "/contact",
-  "/brands",
-]);
+/** Dark first viewport — white nav until scroll (includes brand detail). */
+function isDarkHeroRoute(pathname: string) {
+  if (pathname === "/") return true;
+  return (
+    pathname.startsWith("/about") ||
+    pathname.startsWith("/portfolio") ||
+    pathname.startsWith("/services") ||
+    pathname.startsWith("/visuals") ||
+    pathname.startsWith("/contact") ||
+    pathname.startsWith("/brands")
+  );
+}
 
 export default function Header() {
   const pathname = usePathname();
-  const onDarkHero = darkTransparentRoutes.has(pathname);
+  const onDarkHero = isDarkHeroRoute(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -59,7 +61,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         solid
-          ? "border-b border-gray-200 bg-white/95 text-black backdrop-blur-md"
+          ? "border-b border-white/10 bg-[#1c1c1c]/95 text-white backdrop-blur-md"
           : "border-b border-transparent bg-transparent text-white"
       }`}
     >
@@ -89,11 +91,9 @@ export default function Header() {
                 href={link.href}
                 className={`text-sm font-medium transition-colors ${
                   active
-                    ? solid
-                      ? "text-black"
-                      : "text-white"
+                    ? "text-white"
                     : solid
-                      ? "text-gray-600 hover:text-black"
+                      ? "text-white/55 hover:text-white"
                       : "text-white/80 hover:text-white"
                 }`}
               >
@@ -105,12 +105,12 @@ export default function Header() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <span
-            className={`text-xs font-medium ${solid ? "text-gray-400" : "text-white/50"}`}
+            className={`text-xs font-medium ${solid ? "text-white/40" : "text-white/50"}`}
           >
             TR
           </span>
           <span
-            className={`text-xs font-semibold ${solid ? "text-black" : "text-white"}`}
+            className={`text-xs font-semibold ${solid ? "text-white" : "text-white"}`}
           >
             EN
           </span>
@@ -122,13 +122,13 @@ export default function Header() {
           aria-label="Menu"
         >
           <span
-            className={`block h-0.5 w-6 transition-transform ${solid ? "bg-black" : "bg-white"} ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+            className={`block h-0.5 w-6 bg-white transition-transform ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
           />
           <span
-            className={`block h-0.5 w-6 transition-opacity ${solid ? "bg-black" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`}
+            className={`block h-0.5 w-6 bg-white transition-opacity ${menuOpen ? "opacity-0" : ""}`}
           />
           <span
-            className={`block h-0.5 w-6 transition-transform ${solid ? "bg-black" : "bg-white"} ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            className={`block h-0.5 w-6 bg-white transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
           />
         </button>
       </div>
@@ -139,7 +139,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="relative overflow-hidden border-t border-gray-200 bg-white lg:hidden"
+            className="relative overflow-hidden border-t border-white/10 bg-[#1c1c1c] lg:hidden"
           >
             <nav className="flex flex-col gap-1 px-6 py-6">
               {navLinks.map((link) => (
@@ -147,28 +147,28 @@ export default function Header() {
                   key={link.href + link.label}
                   href={link.href}
                   className={`py-2 text-2xl font-[family-name:var(--font-display)] font-medium ${
-                    pathname === link.href ? "text-black" : "text-gray-600"
+                    pathname === link.href ? "text-white" : "text-white/55"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="mt-6 border-t border-gray-100 pt-6">
+              <div className="mt-6 border-t border-white/10 pt-6">
                 {socialLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block py-2 text-lg text-gray-600"
+                    className="block py-2 text-lg text-white/55"
                   >
                     {link.label}
                   </a>
                 ))}
               </div>
               <div className="mt-4 flex gap-4">
-                <span className="text-sm font-medium text-gray-400">TR</span>
-                <span className="text-sm font-semibold text-black">EN</span>
+                <span className="text-sm font-medium text-white/40">TR</span>
+                <span className="text-sm font-semibold text-white">EN</span>
               </div>
             </nav>
           </m.div>

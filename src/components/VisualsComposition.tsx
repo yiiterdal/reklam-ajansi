@@ -55,13 +55,13 @@ function Caption({
     <div>
       <p
         className={`font-[family-name:var(--font-display)] text-lg font-bold tracking-tight sm:text-xl ${
-          light ? "text-white" : "text-black"
+          light ? "text-white" : "text-[#f2f2f2]"
         }`}
       >
         {item.title}
       </p>
       {item.subtitle ? (
-        <p className={`mt-1 text-sm ${light ? "text-white/70" : "text-black/45"}`}>
+        <p className={`mt-1 text-sm ${light ? "text-white/70" : "text-white/45"}`}>
           {item.subtitle}
         </p>
       ) : null}
@@ -96,7 +96,7 @@ export default function VisualsComposition({ items }: Props) {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
   return (
-    <div className="bg-white text-black">
+    <div className="bg-[#1c1c1c] text-[#f2f2f2]">
       {/* Hero: Body Wave full-bleed + floating stills */}
       <section
         ref={heroRef}
@@ -170,9 +170,9 @@ export default function VisualsComposition({ items }: Props) {
 
       {/* Depth strip: Rewind large + Soft Core overlapping */}
       {(rewind || soft) && (
-        <section className="relative overflow-hidden bg-[#f4f4f4] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <section className="relative overflow-hidden bg-[#262626] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
           <div className="mx-auto mb-12 max-w-[1600px]">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/35">
               Poster craft
             </p>
             <h2 className="mt-3 max-w-lg font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
@@ -282,10 +282,10 @@ export default function VisualsComposition({ items }: Props) {
         </section>
       )}
 
-      <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <section className="border-t border-white/10 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/35">
               Next
             </p>
             <h2 className="mt-3 max-w-lg font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
@@ -295,7 +295,7 @@ export default function VisualsComposition({ items }: Props) {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/portfolio"
-              className="inline-flex rounded-full bg-[#ececec] px-5 py-2.5 text-sm font-medium text-black/70 transition hover:bg-[#e0e0e0]"
+              className="inline-flex rounded-full bg-[#2a2a2a] px-5 py-2.5 text-sm font-medium text-white/70 transition hover:bg-[#333]"
             >
               See the work
             </Link>

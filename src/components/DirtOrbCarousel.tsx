@@ -10,10 +10,8 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
- * dirtverse.co Section Carousel — CSS 3D ring (live Framer props):
- * ballSize 800 · perspective 800 · radius 800 · lockBallSize
- * effective ball = 800 * (perspective/1200) ≈ 533 @ desktop
- * 10 faces (5 orbs × 2) · mouse tilt ±5°/±3° · drag 0.5 · bob -10px
+ * dirtverse-style 3D orb ring — tuned to the reference:
+ * thick white rims, overlapping faces, edge-large / center-small perspective.
  */
 
 const ORBS = [
@@ -44,14 +42,13 @@ const ORBS = [
   },
 ] as const;
 
-/** Same as dirtverse: 5 unique + 5 duplicate = 10 faces on the ring */
 const ITEMS = [...ORBS, ...ORBS];
 const ANGLE_STEP = 360 / ITEMS.length;
 
 const DIRT = {
-  radius: 800,
+  radius: 720,
   perspective: 800,
-  ballSize: 800,
+  ballSize: 860,
   dragSensitivity: 0.5,
   tiltX: 5,
   tiltY: 3,
@@ -63,20 +60,15 @@ type Layout = {
   ball: number;
 };
 
-/**
- * Match the reference frame: edge orbs ~55–60% of viewport height,
- * heavily cropped left/right — dirtverse effective ball ≈ 533 @ 1440×900.
- */
 function measureLayout(w: number, h: number): Layout {
-  const baseBall = DIRT.ballSize * (DIRT.perspective / 1200); // ≈533.3
-  const targetByH = h * 0.58;
-  const targetByW = w * 0.37;
-  const target = Math.min(targetByH, targetByW);
-  const scale = Math.max(0.55, Math.min(1.4, target / baseBall));
+  // Edge orbs ~58% viewport height, heavily cropped — like the reference
+  const baseBall = DIRT.ballSize * (DIRT.perspective / 1200);
+  const target = Math.min(h * 0.6, w * 0.4);
+  const scale = Math.max(0.5, Math.min(1.45, target / baseBall));
 
   const perspective = Math.round(DIRT.perspective * scale);
+  // Tighter radius than ball → adjacent faces overlap
   const radius = Math.round(DIRT.radius * scale);
-  // lockBallSize formula from dirtverse source
   const ball = Math.round(DIRT.ballSize * Math.max(0.2, perspective / 1200));
   return { radius, perspective, ball };
 }
@@ -111,9 +103,9 @@ function OrbFace({
     <motion.div
       aria-label={orb.label}
       role="img"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 + index * 0.04 }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, ease: "easeOut", delay: 0.12 + index * 0.04 }}
       style={{
         position: "absolute",
         width: "100%",
@@ -124,7 +116,7 @@ function OrbFace({
         translateZ,
         backfaceVisibility: "hidden",
         overflow: "hidden",
-        borderRadius: 999,
+        borderRadius: "50%",
         userSelect: "none",
         contain: "layout style paint",
       }}
@@ -135,7 +127,7 @@ function OrbFace({
           width: "100%",
           height: "100%",
           position: "relative",
-          animationDelay: `${1.2 + index * 0.08}s`,
+          animationDelay: `${1.1 + index * 0.08}s`,
           animationDuration: `${2.8 + index * 0.08}s`,
         }}
       >
@@ -215,7 +207,6 @@ export default function DirtOrbCarousel() {
   }, []);
 
   useEffect(() => {
-    // dirtverse entry: start expanded (r*1.8 @ rotateY 270), settle to r @ 180
     const { radius: r } = measureLayout(window.innerWidth, window.innerHeight);
     radiusTarget.set(r * 1.8);
     rotation.set(270);
@@ -325,7 +316,7 @@ export default function DirtOrbCarousel() {
       ref={rootRef}
       className="dirt-orb-carousel relative h-[100svh] w-full select-none"
       style={{
-        backgroundColor: "#ffffff",
+        backgroundColor: "#141414",
         overflow: "hidden",
         cursor: ready ? "grab" : "default",
         perspective: `${layout.perspective}px`,

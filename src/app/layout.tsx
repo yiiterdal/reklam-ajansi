@@ -18,7 +18,7 @@ const syne = Syne({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1a0f24",
+  themeColor: "#1c1c1c",
 };
 
 export const metadata: Metadata = {

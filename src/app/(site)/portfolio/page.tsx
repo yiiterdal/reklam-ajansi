@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <main className="bg-white">
+    <main className="bg-[#1c1c1c]">
       <PortfolioStudio items={PORTFOLIO_WORK} />
     </main>
   );

@@ -797,6 +797,8 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
     let lastFrame = 0;
     let slowFrames = 0;
     const start0 = performance.now();
+    /** Lower Hz = silkier camera follow (topology used ~0.075 @ 60fps ≈ 4.7Hz) */
+    const SCROLL_SMOOTH_HZ = 3.2;
 
     const loop = (now: number) => {
       if (cancelled) return;
@@ -806,10 +808,14 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
         return;
       }
 
+      // Frame dt for rate-independent smoothing
+      const rawDt = lastFrame ? (now - lastFrame) / 1000 : 1 / 60;
+      const dt = Math.min(0.05, Math.max(0.001, rawDt));
+
       // Adaptive quality: sustained slow frames -> render at lower resolution
       if (lastFrame) {
-        const dt = now - lastFrame;
-        if (dt > 26) {
+        const frameMs = now - lastFrame;
+        if (frameMs > 26) {
           if (++slowFrames > 30 && dprScale > 0.55) {
             dprScale -= 0.15;
             slowFrames = 0;
@@ -823,8 +829,9 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
 
       const t = (now - start0) / 1000;
 
-      // Their scroll smoothing: lerpedProgress -> targetProgress at 0.075
-      lerpedProgress += (progressRef.current - lerpedProgress) * 0.075;
+      // Exponential smooth toward scroll target — fluid, no stutter on wheel spikes
+      const alpha = 1 - Math.exp(-SCROLL_SMOOTH_HZ * dt);
+      lerpedProgress += (progressRef.current - lerpedProgress) * alpha;
 
       // Intro: topology.vc plays sequence 0 → hero(2) over 3s (ease:none),
       // then unlocks scroll. Scroll then drives 2 → 8.9.

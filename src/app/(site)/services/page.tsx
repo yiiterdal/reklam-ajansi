@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="bg-white">
+    <main className="bg-[#1c1c1c]">
       <ServicesStudio />
     </main>
   );

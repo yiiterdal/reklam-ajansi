@@ -26,9 +26,9 @@ const pillars = [
 
 export default function Approach() {
   return (
-    <section className="border-t border-gray-200 bg-white py-20 lg:py-28">
+    <section className="border-t border-white/10 bg-[#1c1c1c] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid gap-px bg-gray-200 lg:grid-cols-3">
+        <div className="grid gap-px bg-white/10 lg:grid-cols-3">
           {pillars.map((pillar, i) => (
             <m.article
               key={pillar.number}
@@ -36,15 +36,15 @@ export default function Approach() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-white p-8 lg:p-10"
+              className="bg-[#262626] p-8 lg:p-10"
             >
-              <span className="font-[family-name:var(--font-display)] text-3xl font-bold text-gray-300">
+              <span className="font-[family-name:var(--font-display)] text-3xl font-bold text-white/25">
                 {pillar.number}
               </span>
-              <h3 className="mt-8 font-[family-name:var(--font-display)] text-2xl font-bold text-black lg:text-3xl">
+              <h3 className="mt-8 font-[family-name:var(--font-display)] text-2xl font-bold text-[#f2f2f2] lg:text-3xl">
                 {pillar.title}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-gray-600 lg:text-base">
+              <p className="mt-4 text-sm leading-relaxed text-white/55 lg:text-base">
                 {pillar.description}
               </p>
             </m.article>
@@ -59,13 +59,13 @@ export default function Approach() {
         >
           <Link
             href="/brands"
-            className="text-sm font-semibold uppercase tracking-wider text-black hover:opacity-60"
+            className="text-sm font-semibold uppercase tracking-wider text-[#f2f2f2] hover:opacity-60"
           >
             Our brands →
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-semibold uppercase tracking-wider text-gray-600 hover:text-black"
+            className="text-sm font-semibold uppercase tracking-wider text-white/55 hover:text-[#f2f2f2]"
           >
             Let&apos;s talk about your project →
           </Link>

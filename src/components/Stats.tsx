@@ -65,7 +65,7 @@ function Counter({
 
 export default function Stats() {
   return (
-    <section className="section-flow border-t border-gray-200 bg-gray-50 py-20 lg:py-28">
+    <section className="section-flow border-t border-white/10 bg-gray-50 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid items-start gap-16 lg:grid-cols-[0.45fr_1fr] lg:gap-24">
           <m.div
@@ -75,15 +75,15 @@ export default function Stats() {
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="lg:sticky lg:top-28"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
               By the numbers
             </p>
             <RevealText
               as="h2"
               text="Results-driven at our core"
-              className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold text-black lg:text-4xl"
+              className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold text-[#f2f2f2] lg:text-4xl"
             />
-            <p className="mt-5 text-sm leading-relaxed text-gray-600 lg:text-base">
+            <p className="mt-5 text-sm leading-relaxed text-white/55 lg:text-base">
               We partner with national and international brands — delivering work
               that earns attention and changes behavior on every project.
             </p>
@@ -97,16 +97,16 @@ export default function Stats() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="border-t border-gray-200 pt-8"
+                className="border-t border-white/10 pt-8"
               >
-                <p className="font-[family-name:var(--font-display)] text-4xl font-bold tabular-nums text-black lg:text-5xl">
+                <p className="font-[family-name:var(--font-display)] text-4xl font-bold tabular-nums text-[#f2f2f2] lg:text-5xl">
                   {item.kind === "number" ? (
                     <Counter target={item.value} suffix={item.suffix} />
                   ) : (
                     item.value
                   )}
                 </p>
-                <p className="mt-3 max-w-[14rem] text-sm leading-relaxed text-gray-600">
+                <p className="mt-3 max-w-[14rem] text-sm leading-relaxed text-white/55">
                   {item.label}
                 </p>
               </m.div>
