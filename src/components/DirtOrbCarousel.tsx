@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  motion,
+  m,
   useMotionValue,
   useSpring,
   useTransform,
@@ -108,7 +108,7 @@ function OrbFace({
   }, [visible]);
 
   return (
-    <motion.div
+    <m.div
       aria-label={orb.label}
       role="img"
       initial={{ opacity: 0 }}
@@ -159,7 +159,7 @@ function OrbFace({
           disablePictureInPicture
         />
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -348,7 +348,7 @@ export default function DirtOrbCarousel() {
         }
       `}</style>
 
-      <motion.div
+      <m.div
         style={{
           position: "absolute",
           width: "100%",
@@ -370,7 +370,7 @@ export default function DirtOrbCarousel() {
             transformStyle: "preserve-3d",
           }}
         >
-          <motion.div
+          <m.div
             style={{
               position: "absolute",
               width: "100%",
@@ -389,9 +389,9 @@ export default function DirtOrbCarousel() {
                 visible={visible}
               />
             ))}
-          </motion.div>
+          </m.div>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -38,31 +38,35 @@ export const HOME_WORK: WorkMedia[] = [
     span: "md:col-span-7",
   },
   {
-    src: "/videos/works/work-v0-1.mp4",
-    title: "Fauna",
-    subtitle: "Editorial collage system",
-    aspect: "aspect-[1126/1280]",
+    kind: "image" as const,
+    src: "/images/studio/funky-disco.png",
+    title: "Funky Disco",
+    subtitle: "Poster system · 720×900",
+    aspect: "aspect-[720/900]",
     span: "md:col-span-5",
   },
   {
-    src: "/videos/works/work-tatra-v0-1.mp4",
-    title: "Knicks 2026",
-    subtitle: "Campaign world",
-    aspect: "aspect-square",
+    kind: "image" as const,
+    src: "/images/studio/domus-spheres.png",
+    title: "Soft Stack",
+    subtitle: "3D cover study · 720×955",
+    aspect: "aspect-[720/955]",
     span: "md:col-span-4",
   },
   {
-    src: "/videos/works/work-v0-2.mp4",
-    title: "Year of the Horse",
-    subtitle: "Cultural cut",
-    aspect: "aspect-square",
+    kind: "image" as const,
+    src: "/images/studio/miss-me-cat.png",
+    title: "Miss Me",
+    subtitle: "Risograph print · 720×900",
+    aspect: "aspect-[720/900]",
     span: "md:col-span-4",
   },
   {
-    src: "/videos/works/work-1080-sq.mp4",
-    title: "Digital Age",
-    subtitle: "Print feeling, screen craft",
-    aspect: "aspect-[572/812]",
+    kind: "image" as const,
+    src: "/images/studio/gateway-mark.png",
+    title: "Gateway",
+    subtitle: "Mark in landscape · 1024×576",
+    aspect: "aspect-[1024/576]",
     span: "md:col-span-4",
   },
 ].map(withPoster);
@@ -127,7 +131,7 @@ export const HOME_ARTICLES: WorkMedia[] = [
   },
 ].map(withPoster);
 
-/** /portfolio only */
+/** Work archive — shown on `/` */
 export const PORTFOLIO_WORK: WorkMedia[] = [
   {
     src: "/videos/works/work-0.mp4",
@@ -290,6 +294,20 @@ export const VISUALS_WORK: WorkMedia[] = [
     title: "Pulse Grid",
     subtitle: "Studio loop",
     aspect: "aspect-square",
+  },
+  {
+    kind: "image" as const,
+    src: "/images/studio/spiderman-ticket.png",
+    title: "Ticket Sketch",
+    subtitle: "Found-object comic · 720×990",
+    aspect: "aspect-[720/990]",
+  },
+  {
+    kind: "image" as const,
+    src: "/images/studio/santoriolo-menu.png",
+    title: "Santoriolo",
+    subtitle: "Menu system · 480×849",
+    aspect: "aspect-[480/849]",
   },
 ].map(withPoster);
 

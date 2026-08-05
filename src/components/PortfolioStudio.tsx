@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { m } from "framer-motion";
-import SlowWorkVideo from "@/components/SlowWorkVideo";
 import StudioMediaHero from "@/components/StudioMediaHero";
+import WorkMediaFill from "@/components/WorkMediaFill";
 import type { WorkMedia } from "@/lib/workMedia";
-import { workPoster } from "@/lib/workMedia";
 
 type Props = {
   items: WorkMedia[];
@@ -54,12 +53,12 @@ export default function PortfolioStudio({ items }: Props) {
             viewport={{ once: true }}
             className="relative mx-auto mb-5 max-w-[1600px] overflow-hidden rounded-2xl bg-[#ececec]"
           >
-            <div className="relative aspect-[16/9] md:aspect-[21/9]">
-              <SlowWorkVideo
-                src={second.src}
-                poster={second.poster ?? workPoster(second.src)}
-                rate={0.42}
-                className="absolute inset-0 h-full w-full object-cover"
+            <div className="relative aspect-[16/9] bg-[#ebe8e2] md:aspect-[21/9]">
+              <WorkMediaFill
+                item={second}
+                fit={second.kind === "image" ? "contain" : "cover"}
+                sizes="(max-width: 768px) 100vw, 80vw"
+                className="transition duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
@@ -82,7 +81,7 @@ export default function PortfolioStudio({ items }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % 6) * 0.04 }}
-              className={`group relative overflow-hidden rounded-2xl bg-[#ececec] ${
+              className={`group relative overflow-hidden rounded-2xl bg-[#ebe8e2] ${
                 item.span ?? "md:col-span-4"
               } ${item.aspect} ${
                 i % 5 === 1
@@ -92,11 +91,11 @@ export default function PortfolioStudio({ items }: Props) {
                     : ""
               }`}
             >
-              <SlowWorkVideo
-                src={item.src}
-                poster={item.poster ?? workPoster(item.src)}
-                rate={0.45}
-                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+              <WorkMediaFill
+                item={item}
+                fit={item.kind === "image" ? "contain" : "cover"}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="transition duration-700 group-hover:scale-[1.03]"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 sm:p-5">

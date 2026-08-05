@@ -35,7 +35,7 @@ export default function Footer() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           <div>
             <div className="mb-5">
               <BearLogo variant="horizontal" size={36} className="shrink-0 brightness-0 invert" />
@@ -70,19 +70,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 font-[family-name:var(--font-display)] text-sm font-bold uppercase tracking-wider text-cream/90">
-              Address
-            </p>
-            <address className="not-italic text-sm leading-relaxed text-cream/65">
-              19 Mayis Mah. 19 Mayis Cad.
-              <br />
-              UBM Plaza No:37 Floor 3 Suite 9 Sisli
-              <br />
-              Istanbul, Turkey
-            </address>
           </div>
 
           <div>

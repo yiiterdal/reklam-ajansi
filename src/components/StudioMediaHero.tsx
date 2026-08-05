@@ -78,7 +78,7 @@ export default function StudioMediaHero({
         }`}
       />
 
-      <div className="relative mx-auto flex min-h-[88svh] max-w-[1600px] flex-col justify-end px-5 pb-14 pt-28 sm:px-8 lg:px-12 lg:pb-20 lg:pt-32">
+      <div className="relative mx-auto flex min-h-[88svh] max-w-[1600px] flex-col justify-end px-5 pb-20 pt-16 sm:px-8 lg:px-12 lg:pb-24 lg:pt-20">
         <p
           className={`text-xs font-semibold uppercase tracking-[0.28em] ${
             dark ? "text-white/50" : "text-black/40"

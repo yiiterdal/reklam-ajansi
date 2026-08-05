@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { m } from "framer-motion";
-import SlowWorkVideo from "@/components/SlowWorkVideo";
 import StudioMediaHero from "@/components/StudioMediaHero";
 import Process from "@/components/Process";
-import { HOME_SERVICE_ITEMS, workPoster } from "@/lib/workMedia";
+import WorkMediaFill from "@/components/WorkMediaFill";
+import { HOME_SERVICE_ITEMS } from "@/lib/workMedia";
 
 const DETAIL = [
   {
@@ -67,22 +66,13 @@ export default function ServicesStudio() {
                   i === 0 ? "md:col-span-2 lg:col-span-2 lg:min-h-[480px]" : ""
                 }`}
               >
-                {item.kind === "image" ? (
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width:768px) 100vw, 50vw"
-                    className="object-cover transition duration-700 group-hover:scale-[1.04]"
-                  />
-                ) : (
-                  <SlowWorkVideo
-                    src={item.src}
-                    poster={item.poster ?? workPoster(item.src)}
-                    rate={0.42}
-                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
-                  />
-                )}
+                <WorkMediaFill
+                  item={item}
+                  fit={item.kind === "image" ? "contain" : "cover"}
+                  sizes="(max-width:768px) 100vw, 50vw"
+                  className="transition duration-700 group-hover:scale-[1.03]"
+                  rate={0.42}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
                   <p className="font-[family-name:var(--font-display)] text-3xl font-bold text-white sm:text-4xl">

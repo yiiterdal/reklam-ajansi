@@ -24,13 +24,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Sticky WebGL scrub needs raw scroll — CSS smooth desyncs the sequence */
+  scroll-behavior: auto;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+html.is-page-transitioning,
+html.is-page-transitioning body {
+  overflow-x: clip;
 }
 
 body {
@@ -40,6 +40,8 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* room for fixed bottom 3-tab pill */
+  padding-bottom: 5.5rem;
 }
 
 body::after {

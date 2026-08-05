@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import SlowWorkVideo from "@/components/SlowWorkVideo";
+import WorkMediaFill from "@/components/WorkMediaFill";
 import type { WorkMedia } from "@/lib/workMedia";
-import { workPoster } from "@/lib/workMedia";
 
 type Props = {
   items: WorkMedia[];
@@ -16,29 +14,20 @@ function MediaFill({
   item,
   className = "",
   priority = false,
+  fit = "cover",
 }: {
   item: WorkMedia;
   className?: string;
   priority?: boolean;
+  fit?: "contain" | "cover";
 }) {
-  if (item.kind === "image") {
-    return (
-      <Image
-        src={item.src}
-        alt={item.title}
-        fill
-        priority={priority}
-        sizes="(max-width: 768px) 100vw, 70vw"
-        className={`object-cover ${className}`}
-      />
-    );
-  }
   return (
-    <SlowWorkVideo
-      src={item.src}
-      poster={item.poster ?? workPoster(item.src)}
-      rate={0.42}
-      className={`absolute inset-0 h-full w-full object-cover ${className}`}
+    <WorkMediaFill
+      item={item}
+      className={className}
+      priority={priority}
+      fit={item.kind === "image" ? fit : "cover"}
+      sizes="(max-width: 768px) 100vw, 70vw"
     />
   );
 }
@@ -86,6 +75,24 @@ export default function VisualsComposition({ items }: Props) {
   const soft = byTitle(items, "Soft Core");
   const square = byTitle(items, "Square Signal");
   const pulse = byTitle(items, "Pulse Grid");
+  const ticket = byTitle(items, "Ticket Sketch");
+  const menu = byTitle(items, "Santoriolo");
+
+  const staged = [
+    bodyWave,
+    stamp,
+    wild,
+    underscores,
+    rewind,
+    wide,
+    soft,
+    square,
+    pulse,
+    ticket,
+    menu,
+  ].filter(Boolean) as WorkMedia[];
+  const stagedSrc = new Set(staged.map((i) => i.src));
+  const extras = items.filter((i) => !stagedSrc.has(i.src));
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -97,7 +104,6 @@ export default function VisualsComposition({ items }: Props) {
 
   return (
     <div className="bg-white text-black">
-      {/* Hero: Body Wave full-bleed + floating stills */}
       <section
         ref={heroRef}
         className="relative min-h-[100svh] overflow-hidden bg-[#0e0e0e] text-white"
@@ -105,7 +111,7 @@ export default function VisualsComposition({ items }: Props) {
         {bodyWave ? (
           <m.div className="absolute inset-0" style={{ y: heroY, scale: heroScale }}>
             <div className="absolute inset-0">
-              <MediaFill item={bodyWave} priority />
+              <MediaFill item={bodyWave} priority fit="cover" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
@@ -168,7 +174,6 @@ export default function VisualsComposition({ items }: Props) {
         </div>
       </section>
 
-      {/* Depth strip: Rewind large + Soft Core overlapping */}
       {(rewind || soft) && (
         <section className="relative overflow-hidden bg-[#f4f4f4] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
           <div className="mx-auto mb-12 max-w-[1600px]">
@@ -220,7 +225,56 @@ export default function VisualsComposition({ items }: Props) {
         </section>
       )}
 
-      {/* Wide Cut — full-bleed motion moment */}
+      {(ticket || menu) && (
+        <section className="bg-[#f7f4ee] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+          <div className="mx-auto mb-12 max-w-[1600px]">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
+              Studio prints
+            </p>
+            <h2 className="mt-3 max-w-xl font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
+              Full frame. Real proportions.
+            </h2>
+          </div>
+          <div className="mx-auto grid max-w-[1600px] items-end gap-8 md:grid-cols-12 md:gap-10">
+            {ticket ? (
+              <m.article
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="md:col-span-7"
+              >
+                <div
+                  className={`relative overflow-hidden bg-[#ebe8e2] shadow-[0_20px_50px_rgba(0,0,0,0.08)] ${ticket.aspect}`}
+                >
+                  <MediaFill item={ticket} fit="contain" />
+                </div>
+                <div className="mt-4">
+                  <Caption item={ticket} />
+                </div>
+              </m.article>
+            ) : null}
+            {menu ? (
+              <m.article
+                initial={{ opacity: 0, y: 36 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.08 }}
+                className="md:col-span-5 md:mb-10"
+              >
+                <div
+                  className={`relative mx-auto max-w-md overflow-hidden bg-[#ebe8e2] shadow-[0_20px_50px_rgba(0,0,0,0.08)] md:ml-0 ${menu.aspect}`}
+                >
+                  <MediaFill item={menu} fit="contain" />
+                </div>
+                <div className="mt-4">
+                  <Caption item={menu} />
+                </div>
+              </m.article>
+            ) : null}
+          </div>
+        </section>
+      )}
+
       {wide ? (
         <section className="relative">
           <div className="relative h-[62svh] min-h-[380px] overflow-hidden sm:h-[78svh]">
@@ -235,7 +289,6 @@ export default function VisualsComposition({ items }: Props) {
         </section>
       ) : null}
 
-      {/* Dark stack: staggered loops */}
       {(square || pulse) && (
         <section className="bg-[#111] px-5 py-20 text-white sm:px-8 lg:px-12 lg:py-28">
           <div className="mx-auto mb-12 max-w-[1600px]">
@@ -281,6 +334,37 @@ export default function VisualsComposition({ items }: Props) {
           </div>
         </section>
       )}
+
+      {extras.length > 0 ? (
+        <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+          <div className="mx-auto mb-10 max-w-[1600px]">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/35">
+              More frames
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-[1600px] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {extras.map((item, i) => (
+              <m.article
+                key={item.src}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 6) * 0.05 }}
+              >
+                <div className={`relative overflow-hidden bg-[#ebe8e2] ${item.aspect}`}>
+                  <MediaFill
+                    item={item}
+                    fit={item.kind === "image" ? "contain" : "cover"}
+                  />
+                </div>
+                <div className="mt-3">
+                  <Caption item={item} />
+                </div>
+              </m.article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-8 md:flex-row md:items-end">

@@ -38,8 +38,8 @@ export default function WorkVideoGrid({
           transition={{ duration: 0.5, delay: (i % 6) * 0.04 }}
           className={
             columns === "bento"
-              ? `group relative overflow-hidden rounded-2xl bg-[#e8e8e8] ${item.span ?? "md:col-span-4"} ${item.aspect}`
-              : `group relative mb-3 break-inside-avoid overflow-hidden rounded-2xl bg-[#e8e8e8] ${item.aspect}`
+              ? `group relative overflow-hidden rounded-2xl bg-[#ebe8e2] ${item.span ?? "md:col-span-4"} ${item.aspect}`
+              : `group relative mb-3 break-inside-avoid overflow-hidden rounded-2xl bg-[#ebe8e2] ${item.aspect}`
           }
         >
           {item.kind === "image" ? (
@@ -47,8 +47,9 @@ export default function WorkVideoGrid({
               src={item.src}
               alt={item.title}
               fill
+              quality={100}
               sizes="(max-width: 768px) 100vw, 33vw"
-              className={mediaClass}
+              className="absolute inset-0 h-full w-full object-contain transition duration-700 group-hover:scale-[1.03]"
             />
           ) : (
             <SlowWorkVideo

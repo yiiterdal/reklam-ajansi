@@ -9,7 +9,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import IridescentVortex, { INTRO_DURATION, SEQ_HERO } from "@/components/IridescentVortex";
+import IridescentVortex, { SEQ_HERO } from "@/components/IridescentVortex";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -195,17 +195,16 @@ export default function TopologyHeroIntro() {
   const [play, setPlay] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Scroll over the whole section: 100dvh hold + 450dvh journey
+  // Track length tuned so theatre keyframes scrub at a natural pace
+  const JOURNEY_DVH = 560;
+  const SECTION_DVH = JOURNEY_DVH;
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
-  // raw journey progress (their ScrollTrigger scrub target)
-  const journeyProgress = useTransform(scrollYProgress, (p) => {
-    // section scrollable span = 550dvh: first 100dvh is the hold
-    const scrolled = p * 550;
-    return Math.min(1, Math.max(0, (scrolled - 100) / 450));
-  });
+  // Raw 0→1 into WebGL — sequence easing/follow lives in IridescentVortex
+  const journeyProgress = scrollYProgress;
   // lerped theatre sequence position, written each frame by the canvas
   const seq = useMotionValue(SEQ_HERO);
 
@@ -223,24 +222,13 @@ export default function TopologyHeroIntro() {
     playIntro();
   }, [playIntro]);
 
-  // topology.vc locks scroll until intro finishes (allowScroll after 3s)
-  useEffect(() => {
-    const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    const id = window.setTimeout(() => {
-      document.documentElement.style.overflow = prev;
-    }, INTRO_DURATION * 1000);
-    return () => {
-      window.clearTimeout(id);
-      document.documentElement.style.overflow = prev;
-    };
-  }, []);
+  // Do not lock overflow — top-of-page scroll must stay usable immediately
 
   return (
     <section
       ref={sectionRef}
       className={`${manrope.className} relative bg-[#151515] text-white`}
-      style={{ height: "650dvh" }}
+      style={{ height: `${SECTION_DVH}dvh` }}
       data-play={play ? "true" : "false"}
     >
       <div className="sticky top-0 h-[100dvh] overflow-hidden">

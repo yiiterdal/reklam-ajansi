@@ -1,21 +1,47 @@
 "use client";
 
-import Image from "next/image";
 import { m } from "framer-motion";
-import SlowWorkVideo from "@/components/SlowWorkVideo";
 import ContactSection from "@/components/ContactSection";
-import { workPoster } from "@/lib/workMedia";
+import WorkMediaFill from "@/components/WorkMediaFill";
+import type { WorkMedia } from "@/lib/workMedia";
+
+const CONTACT_MEDIA: WorkMedia[] = [
+  {
+    kind: "image",
+    src: "/images/studio/spiderman-ticket.png",
+    title: "Ticket Sketch",
+    aspect: "aspect-[720/990]",
+  },
+  {
+    kind: "video",
+    src: "/videos/works/work-v0-8.mp4",
+    title: "Rewind Room",
+    aspect: "aspect-[760/948]",
+  },
+  {
+    kind: "image",
+    src: "/images/studio/santoriolo-menu.png",
+    title: "Santoriolo",
+    aspect: "aspect-[480/849]",
+  },
+];
 
 export default function ContactStudio() {
   return (
     <div className="bg-white">
       <section className="relative min-h-[70svh] overflow-hidden bg-[#0e0e0e] text-white lg:min-h-[78svh]">
         <div className="absolute inset-0">
-          <SlowWorkVideo
-            src="/videos/works/work-1080-sq.mp4"
-            poster={workPoster("/videos/works/work-1080-sq.mp4")}
+          <WorkMediaFill
+            item={{
+              kind: "video",
+              src: "/videos/works/work-1080-sq.mp4",
+              title: "Contact backdrop",
+              aspect: "aspect-square",
+            }}
+            fit="cover"
+            sizes="100vw"
             rate={0.4}
-            className="h-full w-full object-cover opacity-80"
+            className="opacity-80"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35" />
@@ -35,37 +61,28 @@ export default function ContactStudio() {
         </div>
       </section>
 
-      {/* Side visual strip above form */}
+      {/* Editorial media strip above form */}
       <section className="px-5 pt-10 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-[1600px] gap-4 md:grid-cols-12">
-          <m.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative aspect-[4/5] overflow-hidden rounded-2xl md:col-span-4 md:aspect-auto md:min-h-[420px]"
-          >
-            <Image
-              src="/images/works/body-wave.png"
-              alt="Body Wave"
-              fill
-              sizes="40vw"
-              className="object-cover"
-            />
-          </m.div>
-          <m.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.08 }}
-            className="relative aspect-video overflow-hidden rounded-2xl md:col-span-8 md:aspect-auto md:min-h-[420px]"
-          >
-            <SlowWorkVideo
-              src="/videos/works/work-v0-8.mp4"
-              poster={workPoster("/videos/works/work-v0-8.mp4")}
-              rate={0.42}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </m.div>
+          {CONTACT_MEDIA.map((item, i) => (
+            <m.article
+              key={item.src}
+              initial={{ opacity: 0, y: 20 + i * 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className={`relative overflow-hidden rounded-2xl bg-[#ebe8e2] ${
+                i === 0 ? "md:col-span-3" : i === 1 ? "md:col-span-6" : "md:col-span-3"
+              } ${item.aspect}`}
+            >
+              <WorkMediaFill
+                item={item}
+                fit={item.kind === "image" ? "contain" : "cover"}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                rate={0.42}
+              />
+            </m.article>
+          ))}
         </div>
       </section>
 

@@ -7,6 +7,7 @@ import { m } from "framer-motion";
 import DirtOrbCarousel from "@/components/DirtOrbCarousel";
 import RaggedCurveRoot from "@/components/RaggedCurveRoot";
 import SlowWorkVideo from "@/components/SlowWorkVideo";
+import WorkMediaFill from "@/components/WorkMediaFill";
 import WaterRippleWordmark from "@/components/WaterRippleWordmark";
 import {
   HOME_ARTICLES,
@@ -20,9 +21,6 @@ import {
  * Selected works / services / news use slow-motion project videos.
  */
 
-const VIDEO_CLASS =
-  "absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]";
-
 export default function CircleGallery() {
   const [activeService, setActiveService] = useState(2);
 
@@ -34,7 +32,7 @@ export default function CircleGallery() {
           <nav className="pointer-events-auto flex items-center gap-2">
             {[
               { label: "About", href: "/about" },
-              { label: "Work", href: "/portfolio" },
+              { label: "Work", href: "/" },
               { label: "Services", href: "/services" },
               { label: "News", href: "/visuals" },
             ].map((l) => (
@@ -120,14 +118,15 @@ export default function CircleGallery() {
                       viewport={{ once: true, amount: 0.25 }}
                       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                       data-ragged-media
-                      className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-8 md:min-h-[52vh] lg:min-h-[58vh]"
+                      className="group relative self-start overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-8 md:min-h-[52vh] lg:min-h-[58vh]"
                     >
                       <div className="relative aspect-video md:absolute md:inset-0 md:aspect-auto">
-                        <SlowWorkVideo
-                          src={lead.src}
-                          poster={lead.poster ?? workPoster(lead.src)}
-                          rate={0.45}
-                          className={VIDEO_CLASS}
+                        <WorkMediaFill
+                          item={lead}
+                          fit="cover"
+                          priority
+                          sizes="(max-width: 768px) 100vw, 70vw"
+                          className="transition duration-700 group-hover:scale-[1.03]"
                         />
                       </div>
                       <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
@@ -153,14 +152,16 @@ export default function CircleGallery() {
                         ease: [0.22, 1, 0.36, 1],
                       }}
                       data-ragged-media
-                      className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 md:mt-16 lg:mt-24"
+                      className="group relative self-start overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 md:mt-16 lg:mt-24"
                     >
-                      <div className={`relative ${side.aspect}`}>
-                        <SlowWorkVideo
-                          src={side.src}
-                          poster={side.poster ?? workPoster(side.src)}
-                          rate={0.45}
-                          className={VIDEO_CLASS}
+                      <div
+                        className={`relative bg-[#ebe8e2] ${side.aspect}`}
+                      >
+                        <WorkMediaFill
+                          item={side}
+                          fit="cover"
+                          sizes="(max-width: 768px) 100vw, 40vw"
+                          className="transition duration-700 group-hover:scale-[1.03]"
                         />
                       </div>
                       <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
@@ -188,7 +189,7 @@ export default function CircleGallery() {
                           ease: [0.22, 1, 0.36, 1],
                         }}
                         data-ragged-media
-                        className={`group relative overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 ${
+                        className={`group relative self-start overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 ${
                           i === 1
                             ? "md:-mt-10 md:z-[1] lg:-mt-16"
                             : i === 2
@@ -196,12 +197,14 @@ export default function CircleGallery() {
                               : "md:mt-2"
                         }`}
                       >
-                        <div className={`relative ${item.aspect}`}>
-                          <SlowWorkVideo
-                            src={item.src}
-                            poster={item.poster ?? workPoster(item.src)}
-                            rate={0.45}
-                            className={VIDEO_CLASS}
+                        <div
+                          className={`relative bg-[#ebe8e2] ${item.aspect}`}
+                        >
+                          <WorkMediaFill
+                            item={item}
+                            fit="cover"
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className="transition duration-700 group-hover:scale-[1.03]"
                           />
                         </div>
                         <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />

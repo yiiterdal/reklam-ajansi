@@ -38,11 +38,6 @@ export default function ContactSection() {
               <br />
               +90 212 213 65 55
             </p>
-            <p>
-              <span className="font-semibold text-black">Address</span>
-              <br />
-              19 Mayis Cad. UBM Plaza, Sisli / Istanbul
-            </p>
           </div>
         </div>
 

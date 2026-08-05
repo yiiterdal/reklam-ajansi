@@ -550,16 +550,11 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
   const containerRef = useRef<HTMLDivElement>(null);
   const idle = useMotionValue(0);
   const progressSource = progress ?? idle;
-  const progressRef = useRef(progressSource.get());
+  /** Read every RAF frame — change-sub alone desyncs under sticky scrub */
+  const progressSourceRef = useRef(progressSource);
+  progressSourceRef.current = progressSource;
   const seqOutRef = useRef(seqOut);
   seqOutRef.current = seqOut;
-
-  useEffect(() => {
-    const unsub = progressSource.on("change", (v) => {
-      progressRef.current = v;
-    });
-    return unsub;
-  }, [progressSource]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -793,10 +788,15 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
     // ---- Render loop
     let frameId = 0;
     let cancelled = false;
-    let lerpedProgress = 0;
+    let seqSmooth = 0;
     let lastFrame = 0;
     let slowFrames = 0;
     const start0 = performance.now();
+    /**
+     * Smooth the theatre SEQUENCE (not scroll %), so camera + titles share
+     * one clock. ~GSAP scrub feel: follows input tightly without wheel stair-steps.
+     */
+    const SEQ_FOLLOW_HZ = 7.2;
 
     const loop = (now: number) => {
       if (cancelled) return;
@@ -806,10 +806,13 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
         return;
       }
 
+      const rawDt = lastFrame ? (now - lastFrame) / 1000 : 1 / 60;
+      const dt = Math.min(0.05, Math.max(0.001, rawDt));
+
       // Adaptive quality: sustained slow frames -> render at lower resolution
       if (lastFrame) {
-        const dt = now - lastFrame;
-        if (dt > 26) {
+        const frameMs = now - lastFrame;
+        if (frameMs > 26) {
           if (++slowFrames > 30 && dprScale > 0.55) {
             dprScale -= 0.15;
             slowFrames = 0;
@@ -822,15 +825,18 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
       lastFrame = now;
 
       const t = (now - start0) / 1000;
+      const progress = Math.min(1, Math.max(0, progressSourceRef.current.get()));
 
-      // Their scroll smoothing: lerpedProgress -> targetProgress at 0.075
-      lerpedProgress += (progressRef.current - lerpedProgress) * 0.075;
-
-      // Intro: topology.vc plays sequence 0 → hero(2) over 3s (ease:none),
-      // then unlocks scroll. Scroll then drives 2 → 8.9.
+      // Intro 0→2 over wall-clock, THEN scroll adds on top (additive).
+      // Math.max(intro, hero+scroll) used to pin seq at 2 from frame 0 and
+      // killed intro↔scroll sync entirely.
       const introPos = Math.min(SEQ_HERO, (t / INTRO_DURATION) * SEQ_HERO);
-      const scrollPos = SEQ_HERO + SEQ_SPAN * lerpedProgress;
-      const seq = forcedSeq !== null ? forcedSeq : Math.max(introPos, scrollPos);
+      const seqTarget = introPos + SEQ_SPAN * progress;
+      const alpha = 1 - Math.exp(-SEQ_FOLLOW_HZ * dt);
+      seqSmooth += (seqTarget - seqSmooth) * alpha;
+
+      const seq = forcedSeq !== null ? forcedSeq : seqSmooth;
+      const scrollAmt = Math.max(0, (seq - SEQ_HERO) / SEQ_SPAN);
       seqOutRef.current?.set(seq);
 
       // Camera from keyframe tracks
@@ -857,7 +863,7 @@ export default function IridescentVortex({ progress, seqOut }: IridescentVortexP
       postMat.uniforms.uNoiseStrength.value = evalTrack(TRK_POST_NOISE, seq);
       postMat.uniforms.uBendAmount.value = evalTrack(TRK_BEND, seq);
       postMat.uniforms.uBottomFadeStrength.value =
-        0.6 * (1 - Math.min(1, Math.max(0, lerpedProgress / 0.15)));
+        0.6 * (1 - Math.min(1, Math.max(0, scrollAmt / 0.15)));
 
       // Fluid sim step (their onRaf, verbatim order). Skipped once the
       // velocity field has fully decayed after the mouse goes idle.
