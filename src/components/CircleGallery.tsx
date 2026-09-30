@@ -312,49 +312,6 @@ export default function CircleGallery() {
           className="absolute inset-0 h-full w-full"
         />
       </section>
-
-      {/* —— Footer (dirtverse layout) —— */}
-      <footer className="border-t border-black/5 px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pt-8 sm:px-8 sm:pb-10 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-3">
-          <div>
-            <p className="font-mono text-[13px] text-black/45">©2026 Bearstow</p>
-          </div>
-          <div>
-            <p className="font-mono text-[13px] uppercase text-black/45">Follow</p>
-            <ul className="mt-3 space-y-1.5">
-              {["Instagram", "Tiktok", "Pinterest"].map((s) => (
-                <li key={s}>
-                  <a href="#" className="text-[13px] text-black/80 transition hover:opacity-50">
-                    {s}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="font-mono text-[13px] uppercase text-black/45">Contact</p>
-            <a
-              href="mailto:hello@bearstow.com"
-              className="mt-3 block text-[13px] text-black/80 transition hover:opacity-50"
-            >
-              hello@bearstow.com
-            </a>
-            <p className="mt-6 font-mono text-[13px] uppercase text-black/45">Legal</p>
-            <ul className="mt-3 space-y-1.5">
-              <li>
-                <Link href="/about" className="text-[13px] text-black/80 hover:opacity-50">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-[13px] text-black/80 hover:opacity-50">
-                  Terms &amp; Conditions
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
