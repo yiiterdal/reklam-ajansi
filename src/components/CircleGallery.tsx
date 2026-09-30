@@ -330,13 +330,6 @@ const WHO_PILLARS = [
   },
 ];
 
-const WHO_STATS = [
-  { value: "2024", label: "Founded" },
-  { value: "5", label: "Disciplines in-house" },
-  { value: "1", label: "Team, start to finish" },
-  { value: "0", label: "Templates" },
-];
-
 function WhoWeAre() {
   const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -410,25 +403,7 @@ function WhoWeAre() {
           ))}
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-black/10 lg:mt-20 lg:grid-cols-4">
-          {WHO_STATS.map((s, i) => (
-            <m.div
-              key={s.label}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6, delay: i * 0.06 }}
-              className="bg-white p-6 sm:p-8"
-            >
-              <p className="font-[family-name:var(--font-display)] text-5xl font-bold tracking-[-0.04em] sm:text-6xl">
-                {s.value}
-              </p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/40">{s.label}</p>
-            </m.div>
-          ))}
-        </div>
-
-        <div className="mt-10 flex justify-end">
+        <div className="mt-14 flex justify-end lg:mt-16">
           <Link
             href="/about"
             className="group inline-flex items-center gap-3 rounded-full border border-black/15 px-5 py-2.5 text-sm font-semibold transition hover:border-black hover:bg-black hover:text-white"
