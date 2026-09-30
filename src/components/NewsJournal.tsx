@@ -220,7 +220,7 @@ export default function NewsJournal() {
             transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
             className="max-w-sm text-base leading-relaxed text-black/55 lg:pb-4"
           >
-            Launches, process notes and the odd side project. What we're making, and what we learn while making it.
+            Launches, process notes and the odd side project. What we&apos;re making, and what we learn while making it.
           </m.p>
         </div>
       </section>
