@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import AboutStudio from "@/components/AboutStudio";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Us: Our Story, Services & Approach",
   description:
-    "Bearstow is a new-generation communications agency — strategy, design, and motion for real-world brands.",
+    "Meet Bearstow, an independent creative studio where strategy, design and motion meet. Our story, our five crafts and how we work.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

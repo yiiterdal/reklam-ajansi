@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[90vh] overflow-hidden pt-32 lg:min-h-screen lg:pt-40">
       <div className="absolute inset-0">
-        <Image
+        <HQImage
           src={images.hero}
           alt=""
           fill

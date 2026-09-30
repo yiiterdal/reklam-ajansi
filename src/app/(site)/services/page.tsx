@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import ServicesStudio from "@/components/ServicesStudio";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Services: Branding, Web Design, Content & Motion",
   description:
-    "Branding, digital, content, motion, and print — craft across every surface.",
+    "Brand strategy and identity, websites and UI, campaign content, motion design and print. Five crafts from one creative studio.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {

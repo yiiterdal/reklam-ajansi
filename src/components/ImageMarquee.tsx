@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
@@ -103,7 +103,7 @@ function TextCard({ item }: { item: TextItem }) {
 function ImageCard({ item }: { item: ImageItem }) {
   return (
     <div className="group relative h-44 w-56 shrink-0 overflow-hidden border border-cream-dark sm:h-52 sm:w-64">
-      <Image
+      <HQImage
         src={item.src}
         alt=""
         fill
@@ -187,7 +187,7 @@ export default function ImageMarquee() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="relative aspect-[4/5] overflow-hidden border border-cream-dark"
           >
-            <Image
+            <HQImage
               src={decor.studio}
               alt=""
               fill

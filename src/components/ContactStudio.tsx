@@ -29,7 +29,7 @@ const CONTACT_MEDIA: WorkMedia[] = [
 export default function ContactStudio() {
   return (
     <div className="bg-white">
-      <section className="relative min-h-[70svh] overflow-hidden bg-[#0e0e0e] text-white lg:min-h-[78svh]">
+      <section className="relative min-h-[85svh] overflow-hidden bg-[#0e0e0e] text-white lg:min-h-[78svh]">
         <div className="absolute inset-0">
           <WorkMediaFill
             item={{
@@ -47,7 +47,7 @@ export default function ContactStudio() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[70svh] max-w-[1600px] flex-col justify-end px-5 pb-14 pt-28 sm:px-8 lg:min-h-[78svh] lg:px-12 lg:pb-20">
+        <div className="relative mx-auto flex min-h-[85svh] max-w-[1600px] flex-col justify-center px-5 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] pt-24 sm:justify-end sm:px-8 sm:pb-14 sm:pt-28 lg:min-h-[78svh] lg:px-12 lg:pb-20">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/50">
             Contact
           </p>

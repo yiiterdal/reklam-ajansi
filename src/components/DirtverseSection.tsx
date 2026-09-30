@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m, useMotionValue, useSpring } from "framer-motion";
 
@@ -306,7 +306,7 @@ export default function DirtverseSection() {
               transition={{ duration: 0.6, delay: i * 0.05 }}
               className={`relative overflow-hidden rounded-2xl bg-[#f0f0f0] ${item.className}`}
             >
-              <Image src={item.image} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
+              <HQImage src={item.image} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
               {item.title && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span
@@ -349,7 +349,7 @@ export default function DirtverseSection() {
             </Link>
           </div>
           <div className="relative aspect-square overflow-hidden rounded-2xl lg:col-span-5">
-            <Image src="/images/hero/paint-splash.jpg" alt="" fill className="object-cover" sizes="40vw" />
+            <HQImage src="/images/hero/paint-splash.jpg" alt="" fill className="object-cover" sizes="40vw" />
           </div>
         </div>
       </section>
@@ -371,7 +371,7 @@ export default function DirtverseSection() {
               transition={{ duration: 0.55, delay: i * 0.06 }}
             >
               <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-2xl bg-[#f0f0f0]">
-                <Image src={a.image} alt="" fill className="object-cover" sizes="33vw" />
+                <HQImage src={a.image} alt="" fill className="object-cover" sizes="33vw" />
               </div>
               <h3 className="font-[family-name:var(--font-display)] text-lg font-bold leading-snug tracking-tight">
                 {a.title}
@@ -392,7 +392,7 @@ export default function DirtverseSection() {
             hello@bearstow.com
           </a>
           <p className="mt-4 max-w-lg text-lg font-semibold tracking-tight sm:text-xl">
-            Grounded in Istanbul. Built for the world.
+            Small studio. Built for brands that want to be felt.
           </p>
         </div>
       </section>

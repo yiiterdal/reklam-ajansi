@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import SlowWorkVideo from "@/components/SlowWorkVideo";
 import { workPoster } from "@/lib/workMedia";
@@ -52,7 +52,7 @@ export default function StudioMediaHero({
         </div>
       ) : imageSrc ? (
         <div className="absolute inset-0">
-          <Image
+          <HQImage
             src={imageSrc}
             alt=""
             fill

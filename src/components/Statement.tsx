@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
@@ -49,7 +49,7 @@ function StatementBlock({
       }`}
     >
       <m.div style={{ y }} className="relative aspect-[4/5] overflow-hidden">
-        <Image
+        <HQImage
           src={item.image}
           alt=""
           fill

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import { m } from "framer-motion";
 import { galleryItems } from "@/lib/gallery";
 
@@ -33,7 +33,7 @@ export default function GalleryGrid() {
           transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
           className={`group relative min-h-[180px] overflow-hidden border border-cream-dark ${layoutClasses[i] ?? ""}`}
         >
-          <Image
+          <HQImage
             src={item.src}
             alt={item.title}
             fill

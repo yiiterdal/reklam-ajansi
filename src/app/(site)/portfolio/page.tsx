@@ -3,9 +3,10 @@ import PortfolioStudio from "@/components/PortfolioStudio";
 import { PORTFOLIO_WORK } from "@/lib/workMedia";
 
 export const metadata: Metadata = {
-  title: "Work",
+  title: "Work: Selected Projects",
   description:
-    "Selected motion, brand films, and campaign loops from Bearstow — including Tatra House and recent studio work.",
+    "Selected branding, motion and campaign work from Bearstow, including brand films, identity systems and recent studio projects.",
+  alternates: { canonical: "/portfolio" },
 };
 
 export default function PortfolioPage() {

@@ -52,7 +52,7 @@ export default function SlowWorkVideo({
           pause();
         }
       },
-      { rootMargin: "30% 0px", threshold: 0.01 },
+      { rootMargin: "15% 0px", threshold: 0.01 },
     );
     io.observe(v);
 

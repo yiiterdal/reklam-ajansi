@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import BrandsStudio from "@/components/BrandsStudio";
 
 export const metadata: Metadata = {
-  title: "Our Brands",
+  title: "Our Brands: Clients & Partners",
   description:
-    "Partners we build with — branding, strategy, web, and campaign worlds.",
+    "Brands we build with: branding, strategy, websites and campaign work for clients across industries.",
+  alternates: { canonical: "/brands" },
 };
 
 export default function BrandsPage() {

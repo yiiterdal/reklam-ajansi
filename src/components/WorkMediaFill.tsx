@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import SlowWorkVideo from "@/components/SlowWorkVideo";
 import type { WorkMedia } from "@/lib/workMedia";
 import { workPoster } from "@/lib/workMedia";
@@ -29,7 +29,7 @@ export default function WorkMediaFill({
 }: Props) {
   if (item.kind === "image") {
     return (
-      <Image
+      <HQImage
         src={item.src}
         alt={item.title}
         fill

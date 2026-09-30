@@ -19,8 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!brand) return { title: "Brand not found" };
 
   return {
-    title: brand.name,
-    description: `${brand.name} — ${brand.services.join(", ")}`,
+    title: `${brand.name}: Case Study`,
+    description: `${brand.name} x Bearstow: ${brand.services.join(", ")}.`,
+    alternates: { canonical: `/brands/${brand.slug}` },
   };
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
 import InvestCorner from "@/components/InvestCorner";
@@ -73,7 +73,7 @@ export default function Themes() {
               </div>
 
               <div className="absolute inset-0">
-                <Image
+                <HQImage
                   src={service.image}
                   alt=""
                   fill

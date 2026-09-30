@@ -28,11 +28,11 @@ export default function Header() {
   const active = activeTab(pathname);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 bottom-0 z-[70] flex justify-center px-4 pb-5 sm:pb-7">
+    <header className="pointer-events-none fixed inset-x-0 bottom-0 z-[70] flex justify-center px-3 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:px-4 sm:pb-[calc(1.75rem+env(safe-area-inset-bottom,0px))]">
       <LayoutGroup id="primary-tabs">
         <nav
           aria-label="Primary"
-          className="pointer-events-auto flex items-center rounded-full bg-[#e8e8e8]/92 p-[5px] shadow-[0_12px_40px_rgba(0,0,0,0.14)] backdrop-blur-md"
+          className="pointer-events-auto flex max-w-[calc(100vw-1.5rem)] items-center rounded-full bg-[#e8e8e8]/92 p-[4px] shadow-[0_12px_40px_rgba(0,0,0,0.14)] backdrop-blur-md sm:p-[5px]"
         >
           {TABS.map((tab) => {
             const isActive = active === tab.id;
@@ -40,7 +40,7 @@ export default function Header() {
               <Link
                 key={tab.id}
                 href={tab.href}
-                className="relative isolate rounded-full px-5 py-2.5 text-[15px] font-medium tracking-[-0.01em] sm:px-7 sm:py-3 sm:text-[16px]"
+                className="relative isolate rounded-full px-4 py-2.5 text-[14px] font-medium tracking-[-0.01em] sm:px-7 sm:py-3 sm:text-[16px]"
               >
                 {isActive ? (
                   <m.span

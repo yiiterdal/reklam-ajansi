@@ -3,9 +3,10 @@ import VisualsGallery from "@/components/VisualsGallery";
 import { VISUALS_WORK } from "@/lib/workMedia";
 
 export const metadata: Metadata = {
-  title: "Visuals",
+  title: "Visuals: Motion & Design Library",
   description:
-    "Motion references and brand textures from the Bearstow creative library.",
+    "Motion studies, brand textures and visual experiments from the Bearstow creative library.",
+  alternates: { canonical: "/visuals" },
 };
 
 export default function VisualsPage() {

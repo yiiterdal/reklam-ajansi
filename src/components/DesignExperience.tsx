@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import DesignOpenIntro from "@/components/DesignOpenIntro";
@@ -241,7 +241,7 @@ function MosaicCard({
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.85, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Image src={tile.src} alt="" fill className="object-cover" sizes="40vw" />
+      <HQImage src={tile.src} alt="" fill className="object-cover" sizes="40vw" />
       {tile.accent === "dark" && <div className="absolute inset-0 bg-black/35" />}
       {tile.accent === "lime" && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#c8ff00]">
@@ -389,7 +389,7 @@ function PhoneFrame({
     >
       <div className="rounded-[2rem] bg-[#e8e8e8] p-3 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
         <div className="relative overflow-hidden rounded-[1.55rem] bg-black aspect-[9/19]">
-          <Image src={image} alt="" fill className="object-cover" sizes="260px" />
+          <HQImage src={image} alt="" fill className="object-cover" sizes="260px" />
           <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-3">
             <div className="h-5 w-20 rounded-full bg-black/80" />
           </div>
@@ -488,7 +488,7 @@ export default function DesignExperience() {
                     zIndex: i + 1,
                   }}
                 >
-                  <Image src={src} alt="" fill className="object-cover" sizes="160px" />
+                  <HQImage src={src} alt="" fill className="object-cover" sizes="160px" />
                 </div>
               ))}
             </div>
@@ -505,7 +505,7 @@ export default function DesignExperience() {
             transition={{ duration: 0.7, delay: 0.08 }}
             className="relative min-h-[340px] overflow-hidden rounded-[1.5rem] bg-[#111]"
           >
-            <Image
+            <HQImage
               src="/images/hero/design-mockup.jpg"
               alt=""
               fill
@@ -526,7 +526,7 @@ export default function DesignExperience() {
             transition={{ duration: 0.7, delay: 0.16 }}
             className="relative min-h-[340px] overflow-hidden rounded-[1.5rem] bg-[#f6f6f6]"
           >
-            <Image
+            <HQImage
               src="/images/hero/color-field.jpg"
               alt=""
               fill
@@ -584,7 +584,7 @@ export default function DesignExperience() {
                       New
                     </span>
                     <span className="relative h-16 w-28 overflow-hidden rounded-md sm:h-20 sm:w-36">
-                      <Image
+                      <HQImage
                         src="/images/manifesto/studio-meeting.jpg"
                         alt=""
                         fill

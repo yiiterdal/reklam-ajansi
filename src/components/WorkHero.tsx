@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import { m, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import RevealText from "@/components/RevealText";
 
@@ -76,7 +76,7 @@ export default function WorkHero() {
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0"
           >
-            <Image
+            <HQImage
               src={heroSlides[activeSlide]}
               alt=""
               fill
@@ -172,7 +172,7 @@ export default function WorkHero() {
                 transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0"
               >
-                <Image
+                <HQImage
                   src={heroSlides[activeSlide]}
                   alt=""
                   fill

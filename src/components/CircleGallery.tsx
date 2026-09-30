@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { m } from "framer-motion";
@@ -28,29 +28,31 @@ export default function CircleGallery() {
     <div className="bg-white text-black">
       {/* —— Hero: Dirt-style 3D orb cylinder —— */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 mx-auto flex max-w-7xl items-center justify-between px-5 pt-6 sm:px-8 lg:px-12">
-          <nav className="pointer-events-auto flex items-center gap-2">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 pt-[max(1rem,env(safe-area-inset-top,0px))] sm:px-8 sm:pt-6 lg:px-12">
+          <nav className="pointer-events-auto flex max-w-[70%] items-center gap-1.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] sm:max-w-none sm:gap-2 [&::-webkit-scrollbar]:hidden">
             {[
-              { label: "About", href: "/about" },
-              { label: "Work", href: "/" },
-              { label: "Services", href: "/services" },
-              { label: "News", href: "/visuals" },
+              { label: "About", href: "/about", mobile: true },
+              { label: "Work", href: "/", mobile: true },
+              { label: "Services", href: "/services", mobile: false },
+              { label: "News", href: "/visuals", mobile: false },
             ].map((l) => (
               <Link
                 key={l.label}
                 href={l.href}
-                className="rounded-full bg-[#ececec]/90 px-3.5 py-2 text-sm font-medium text-black/75 backdrop-blur-sm transition hover:bg-[#e0e0e0] sm:px-4"
+                className={`shrink-0 rounded-full bg-[#ececec]/90 px-2.5 py-1.5 text-xs font-medium text-black/75 backdrop-blur-sm transition hover:bg-[#e0e0e0] sm:px-4 sm:py-2 sm:text-sm ${
+                  l.mobile ? "" : "hidden sm:inline-flex"
+                }`}
               >
                 {l.label}
               </Link>
             ))}
           </nav>
-          <p className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
+          <p className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:block sm:text-2xl">
             bearstow
           </p>
           <Link
             href="/contact"
-            className="pointer-events-auto rounded-full bg-black px-4 py-2 text-sm font-medium text-white sm:px-5 sm:py-2.5"
+            className="pointer-events-auto shrink-0 rounded-full bg-black px-3.5 py-1.5 text-xs font-medium text-white sm:px-5 sm:py-2.5 sm:text-sm"
           >
             Contact
           </Link>
@@ -59,13 +61,13 @@ export default function CircleGallery() {
         <DirtOrbCarousel />
 
         {/* dirtverse-style: light fade only, copy sits over the ring */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 pb-8 pt-16 sm:pb-10 sm:pt-20">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 pb-[calc(5.75rem+env(safe-area-inset-bottom,0px))] pt-12 sm:pb-10 sm:pt-20">
           <div className="mx-auto flex max-w-[1600px] items-end justify-between gap-6 px-5 sm:px-8 lg:px-12">
             <div>
               <p className="text-sm text-black/50 sm:text-[15px]">
                 Welcome to the bearverse.
               </p>
-              <p className="mt-1.5 max-w-sm font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-black sm:text-xl">
+              <p className="mt-1.5 max-w-sm font-[family-name:var(--font-display)] text-base font-bold tracking-tight text-black sm:text-xl">
                 A creative ecosystem for real world brands.
               </p>
             </div>
@@ -260,7 +262,7 @@ export default function CircleGallery() {
                   aria-pressed={active}
                 >
                   {item.kind === "image" ? (
-                    <Image
+                    <HQImage
                       src={item.src}
                       alt={item.subtitle ?? item.title}
                       fill
@@ -388,7 +390,7 @@ export default function CircleGallery() {
             hello@bearstow.com
           </a>
           <p className="mt-6 max-w-xl text-lg font-semibold tracking-tight sm:text-xl">
-            Grounded in Istanbul. Built for the world.
+            Small studio. Built for brands that want to be felt.
           </p>
         </m.div>
       </section>
@@ -407,7 +409,7 @@ export default function CircleGallery() {
       </section>
 
       {/* —— Footer (dirtverse layout) —— */}
-      <footer className="border-t border-black/5 px-5 pb-10 pt-8 sm:px-8 lg:px-12">
+      <footer className="border-t border-black/5 px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pt-8 sm:px-8 sm:pb-10 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-3">
           <div>
             <p className="font-mono text-[13px] text-black/45">©2026 Bearstow</p>
@@ -481,7 +483,7 @@ function EnquiryClose() {
           className="lg:col-span-6"
         >
           <p className="font-mono text-[13px] uppercase tracking-[0.02em] text-black/50">
-            It starts at the edge
+            Let&apos;s make something
           </p>
           <p className="mt-8 font-[family-name:var(--font-display)] text-[clamp(1.35rem,2.6vw,2.05rem)] font-bold leading-[1.3] tracking-tight text-black">
             You&apos;re onto something, and you need work people can&apos;t ignore.

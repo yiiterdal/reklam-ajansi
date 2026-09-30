@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import ScrollIndicator from "@/components/ScrollIndicator";
@@ -34,7 +34,7 @@ export default function PageHero({ label, title, description, image }: PageHeroP
           style={{ y: imageY }}
           className="absolute inset-0 scale-110"
         >
-          <Image src={image} alt="" fill className="object-cover" priority sizes="100vw" />
+          <HQImage src={image} alt="" fill className="object-cover" priority sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/60" />
         </m.div>
 

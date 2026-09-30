@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m } from "framer-motion";
 import SlowWorkVideo from "@/components/SlowWorkVideo";
@@ -43,7 +43,7 @@ export default function WorkVideoGrid({
           }
         >
           {item.kind === "image" ? (
-            <Image
+            <HQImage
               src={item.src}
               alt={item.title}
               fill

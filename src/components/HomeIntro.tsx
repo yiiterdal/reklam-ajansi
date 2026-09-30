@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
@@ -73,7 +73,7 @@ export default function HomeIntro() {
               transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
               className={`absolute overflow-hidden border border-cream-dark shadow-lg shadow-ink/10 ${item.className}`}
             >
-              <Image
+              <HQImage
                 src={item.src}
                 alt=""
                 fill

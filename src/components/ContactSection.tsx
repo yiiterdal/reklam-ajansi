@@ -31,12 +31,7 @@ export default function ContactSection() {
             <p>
               <span className="font-semibold text-black">Email</span>
               <br />
-              hello@bearstow.agency
-            </p>
-            <p>
-              <span className="font-semibold text-black">Phone</span>
-              <br />
-              +90 212 213 65 55
+              hello@bearstow.com
             </p>
           </div>
         </div>

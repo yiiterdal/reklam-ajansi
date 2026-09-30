@@ -1,4 +1,4 @@
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { images } from "@/lib/images";
 import MagneticButton from "@/components/MagneticButton";
@@ -12,7 +12,7 @@ export default function Cta() {
             className="pointer-events-none absolute inset-0 opacity-[0.08]"
             aria-hidden
           >
-            <Image
+            <HQImage
               src={images.decor.grainLavender}
               alt=""
               fill

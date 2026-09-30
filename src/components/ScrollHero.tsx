@@ -35,9 +35,9 @@ export default function ScrollHero() {
           className="pointer-events-none absolute inset-x-0 bottom-[12%] z-10 flex items-end justify-between px-8 lg:bottom-[14%] lg:px-14"
         >
           <h1 className="max-w-xl font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,5.5rem)] font-bold leading-[1.02] tracking-tight text-[#1a1a1a]">
-            Meet us at
+            Ideas that
             <br />
-            the edge.
+            move people.
           </h1>
           <p className="hidden max-w-xs text-right text-sm leading-relaxed text-[#555] sm:block lg:text-base">
             A new-generation communications agency — strategy, design, and

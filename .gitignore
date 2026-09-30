@@ -35,6 +35,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# local scratch output
+/.tmp-*/
+/.tmp-*
+.vercel
+
 # local extraction / reference frames (not shipped)
 /public/images/ref-*
 /public/images/480-00-*

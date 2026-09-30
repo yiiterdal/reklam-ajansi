@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 
 const variants = {
   icon: { src: "/images/brand/icon.png", ratio: 1 },
@@ -31,7 +31,7 @@ export default function BearLogo({
   const width = Math.round(size * ratio);
 
   return (
-    <Image
+    <HQImage
       src={src}
       alt="Bearstow"
       width={width}

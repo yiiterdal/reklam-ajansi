@@ -34,7 +34,7 @@ export default function Footer() {
         className="pointer-events-none absolute -right-1/4 bottom-0 h-64 w-64 rounded-full bg-fuchsia-600/15 blur-[90px]"
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] lg:px-10 lg:pt-20 lg:pb-[calc(8rem+env(safe-area-inset-bottom,0px))]">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           <div>
             <div className="mb-5">
@@ -78,18 +78,13 @@ export default function Footer() {
             </p>
             <ul className="space-y-2 text-sm text-cream/65">
               <li>
-                <a href="tel:+902122136555" className="transition-colors hover:text-violet-200">
-                  Phone: +90 212 213 65 55
+                <a href="mailto:careers@bearstow.com" className="transition-colors hover:text-violet-200">
+                  Careers: careers@bearstow.com
                 </a>
               </li>
               <li>
-                <a href="mailto:careers@bearstow.agency" className="transition-colors hover:text-violet-200">
-                  Careers: careers@bearstow.agency
-                </a>
-              </li>
-              <li>
-                <a href="mailto:hello@bearstow.agency" className="transition-colors hover:text-violet-200">
-                  General: hello@bearstow.agency
+                <a href="mailto:hello@bearstow.com" className="transition-colors hover:text-violet-200">
+                  General: hello@bearstow.com
                 </a>
               </li>
             </ul>

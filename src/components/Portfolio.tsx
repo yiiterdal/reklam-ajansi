@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HQImage from "@/components/HQImage";
 import Link from "next/link";
 import { m } from "framer-motion";
 import { images } from "@/lib/images";
@@ -50,7 +50,7 @@ export default function Portfolio() {
                 }`}
               >
                 <div className="relative aspect-[5/4] overflow-hidden lg:aspect-auto lg:min-h-[22rem]">
-                  <Image
+                  <HQImage
                     src={project.image}
                     alt=""
                     fill

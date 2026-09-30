@@ -21,19 +21,18 @@ const manrope = Manrope({
    tagline at 0.5 duration 1 stagger 0.075 from x:100, footer at 0.5 duration 1 */
 const TITLE_LINES = [
   [
-    { word: "Meet", delay: "0.5s" },
-    { word: "us", delay: "0.6s" },
+    { word: "Ideas", delay: "0.5s" },
+    { word: "that", delay: "0.6s" },
   ],
   [
-    { word: "at", delay: "0.7s" },
-    { word: "the", delay: "0.8s" },
-    { word: "edge.", delay: "0.9s" },
+    { word: "move", delay: "0.7s" },
+    { word: "people.", delay: "0.8s" },
   ],
 ] as const;
 
 const TAGLINE = [
-  { text: "A new-generation communications", delay: "1s" },
-  { text: "agency for brands that move culture.", delay: "1.075s" },
+  { text: "Brand, digital, content and motion", delay: "1s" },
+  { text: "for brands that want to be felt.", delay: "1.075s" },
 ] as const;
 
 /* topology.vc scroll layout: hero(100dvh hold) + 450dvh journey.
@@ -130,7 +129,7 @@ function WebglBody({
   });
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-[6] flex items-end justify-center px-6 pb-[10vh] sm:pb-[12vh]">
+    <div className="pointer-events-none absolute inset-0 z-[6] flex items-end justify-center px-5 pb-[max(10vh,calc(5.75rem+env(safe-area-inset-bottom,0px)))] sm:px-6 sm:pb-[12vh]">
       <m.div
         style={{ opacity, y, scale }}
         className="flex w-full max-w-3xl flex-col items-center text-center"
@@ -290,12 +289,12 @@ export default function TopologyHeroIntro() {
         {/* Hero text — fades out over sequence 2 -> 2.7 like their .js-hero */}
         <m.div
           style={{ opacity: heroOpacity, visibility: heroVisibility }}
-          className="topo-hero relative z-10 flex h-full flex-col justify-end px-[var(--topo-pad)] pb-8"
+          className="topo-hero relative z-10 flex h-full flex-col justify-end px-[var(--topo-pad)] pb-[calc(6.25rem+env(safe-area-inset-bottom,0px))] sm:pb-8"
         >
           <div className="w-full">
-            <div className="mb-10 flex flex-wrap items-end">
+            <div className="mb-5 flex flex-wrap items-end sm:mb-10">
               <div className="w-full lg:w-1/2">
-                <h1 className="m-0 text-[clamp(44px,9.4vw,135px)] font-light leading-[0.9] tracking-[-1.35px] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.25)] max-[640px]:tracking-[-0.6px]">
+                <h1 className="m-0 text-[clamp(40px,11vw,135px)] font-light leading-[0.9] tracking-[-1.35px] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.25)] max-[640px]:tracking-[-0.6px]">
                   {TITLE_LINES.map((line, li) => (
                     <span key={li}>
                       {li > 0 ? <br /> : null}
@@ -315,8 +314,8 @@ export default function TopologyHeroIntro() {
                 </h1>
               </div>
 
-              <div className="mt-10 flex w-full items-end lg:mt-0 lg:ml-[6%] lg:w-[34%]">
-                <p className="m-0 max-w-[500px] overflow-hidden text-[clamp(19px,1.9vw,24px)] font-light leading-none tracking-[0.45px] text-white drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
+              <div className="mt-4 flex w-full items-end sm:mt-10 lg:mt-0 lg:ml-[6%] lg:w-[34%]">
+                <p className="m-0 max-w-[500px] text-[clamp(16px,4.2vw,24px)] font-light leading-[1.25] tracking-[0.45px] text-white drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] sm:overflow-hidden sm:text-[clamp(19px,1.9vw,24px)] sm:leading-none">
                   {TAGLINE.map((line) => (
                     <span
                       key={line.text}
@@ -330,13 +329,13 @@ export default function TopologyHeroIntro() {
               </div>
             </div>
 
-            <div className="topo-footer relative flex flex-wrap items-center justify-between pt-8 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-[rgba(224,232,236,0.3)]">
-              <p className="m-0 text-sm font-light uppercase tracking-[1.4px] text-white">
+            <div className="topo-footer relative mt-4 flex flex-wrap items-center justify-between pt-5 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-[rgba(224,232,236,0.3)] sm:mt-0 sm:pt-8">
+              <p className="m-0 text-[11px] font-light uppercase tracking-[1.4px] text-white sm:text-sm">
                 Bearstow ©2026
               </p>
               <a
                 href="#work"
-                className="inline-flex items-center gap-1.5 text-sm font-light uppercase tracking-[1.4px] text-white no-underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-light uppercase tracking-[1.4px] text-white no-underline sm:text-sm"
               >
                 Explore
                 <svg
@@ -353,17 +352,17 @@ export default function TopologyHeroIntro() {
         </m.div>
 
         {/* Scroll journey titles (their .js-webgl-title blocks) */}
-        <WebglTitle seq={seq} text="You jump..." show={TITLE0_SHOW} hide={TITLE0_HIDE} />
-        <WebglTitle seq={seq} text="We jump..." show={TITLE1_SHOW} hide={TITLE1_HIDE} />
-        <WebglTitle seq={seq} text="At the edge." show={TITLE2_SHOW} hide={TITLE2_HIDE} />
+        <WebglTitle seq={seq} text="You dream it..." show={TITLE0_SHOW} hide={TITLE0_HIDE} />
+        <WebglTitle seq={seq} text="We make it real." show={TITLE1_SHOW} hide={TITLE1_HIDE} />
+        <WebglTitle seq={seq} text="Hard to forget." show={TITLE2_SHOW} hide={TITLE2_HIDE} />
         <WebglBody
           seq={seq}
           show={BODY_SHOW}
           hide={BODY_HIDE}
-          eyebrow="Where we work from"
+          eyebrow="What we do"
           lines={[
-            "Strategy, design, and culture",
-            "for brands that refuse the middle.",
+            "One studio for strategy, identity,",
+            "digital, film and everything in between.",
           ]}
         />
       </div>
