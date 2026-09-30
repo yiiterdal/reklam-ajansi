@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Serve source files as-is: AVIF/WebP re-encoding halves chroma and softens fine detail.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     // Include retina full-bleed widths so 100vw heroes stay sharp on 2x/3x
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560, 3840],

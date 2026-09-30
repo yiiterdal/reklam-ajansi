@@ -4,7 +4,7 @@ import HQImage from "@/components/HQImage";
 
 const variants = {
   icon: { src: "/images/brand/icon.png", ratio: 1 },
-  horizontal: { src: "/images/brand/logo-horizontal.png", ratio: 1200 / 390 },
+  horizontal: { src: "/images/brand/logo-wordmark.png", ratio: 1380 / 531 },
   stacked: { src: "/images/brand/logo-stacked.png", ratio: 777 / 900 },
   emblem: { src: "/images/brand/logo-emblem.png", ratio: 900 / 828 },
   monogram: { src: "/images/brand/logo-monogram.png", ratio: 780 / 900 },

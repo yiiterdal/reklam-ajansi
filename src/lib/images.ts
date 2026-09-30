@@ -2,7 +2,7 @@ export const images = {
   hero: "/images/glow-teal-orange.png",
   texture: "/images/pexels-resourceboy-18541754-cd39271a-ad48-4104-bc27-9109fd0c4791.png",
   logo: "/images/brand/icon.png",
-  logoHorizontal: "/images/brand/logo-horizontal.png",
+  logoHorizontal: "/images/brand/logo-wordmark.png",
   logoStacked: "/images/brand/logo-stacked.png",
   logoEmblem: "/images/brand/logo-emblem.png",
   logoMonogram: "/images/brand/logo-monogram.png",

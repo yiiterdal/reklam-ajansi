@@ -107,124 +107,36 @@ export default function CircleGallery() {
             </Link>
           </div>
 
-          {/* Layered editorial spread — hero pair + overlapping row */}
-          {(() => {
-            const [lead, side, ...rest] = HOME_WORK;
-            return (
-              <div className="mx-auto max-w-[1600px]">
-                <div className="grid gap-3 md:grid-cols-12 md:gap-4 lg:gap-5">
-                  {lead ? (
-                    <m.article
-                      initial={{ opacity: 0, y: 28 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.25 }}
-                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                      data-ragged-media
-                      className="group relative self-start overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-8 md:min-h-[52vh] lg:min-h-[58vh]"
-                    >
-                      <div className="relative aspect-video md:absolute md:inset-0 md:aspect-auto">
-                        <WorkMediaFill
-                          item={lead}
-                          fit="cover"
-                          priority
-                          sizes="(max-width: 768px) 100vw, 70vw"
-                          className="transition duration-700 group-hover:scale-[1.03]"
-                        />
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-7 lg:p-9">
-                        <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
-                          {lead.title}
-                        </h3>
-                        <p className="mt-1.5 text-sm text-white/75 sm:text-base">
-                          {lead.subtitle}
-                        </p>
-                      </div>
-                    </m.article>
-                  ) : null}
-
-                  {side ? (
-                    <m.article
-                      initial={{ opacity: 0, y: 36 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.25 }}
-                      transition={{
-                        duration: 0.75,
-                        delay: 0.08,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      data-ragged-media
-                      className="group relative self-start overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 md:mt-16 lg:mt-24"
-                    >
-                      <div
-                        className={`relative bg-[#ebe8e2] ${side.aspect}`}
-                      >
-                        <WorkMediaFill
-                          item={side}
-                          fit="cover"
-                          sizes="(max-width: 768px) 100vw, 40vw"
-                          className="transition duration-700 group-hover:scale-[1.03]"
-                        />
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-6">
-                        <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white sm:text-2xl">
-                          {side.title}
-                        </h3>
-                        <p className="mt-1 text-sm text-white/75">{side.subtitle}</p>
-                      </div>
-                    </m.article>
-                  ) : null}
+          <div className="mx-auto grid max-w-[1600px] grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:gap-5">
+            {HOME_WORK.map((item, i) => (
+              <m.article
+                key={item.src}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.65, delay: (i % 3) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                data-ragged-media
+                className="group relative overflow-hidden rounded-2xl bg-[#f0f0f0]"
+              >
+                <div className={`relative bg-[#ebe8e2] ${item.aspect}`}>
+                  <WorkMediaFill
+                    item={item}
+                    fit="cover"
+                    priority={i < 3}
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="transition duration-700 group-hover:scale-[1.03]"
+                  />
                 </div>
-
-                {rest.length > 0 ? (
-                  <div className="relative mt-3 grid gap-3 sm:mt-4 md:mt-5 md:grid-cols-12 md:gap-4 lg:gap-5">
-                    {rest.map((item, i) => (
-                      <m.article
-                        key={item.src}
-                        initial={{ opacity: 0, y: 32 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{
-                          duration: 0.65,
-                          delay: i * 0.07,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                        data-ragged-media
-                        className={`group relative self-start overflow-hidden rounded-2xl bg-[#f0f0f0] md:col-span-4 ${
-                          i === 1
-                            ? "md:-mt-10 md:z-[1] lg:-mt-16"
-                            : i === 2
-                              ? "md:mt-8 lg:mt-12"
-                              : "md:mt-2"
-                        }`}
-                      >
-                        <div
-                          className={`relative bg-[#ebe8e2] ${item.aspect}`}
-                        >
-                          <WorkMediaFill
-                            item={item}
-                            fit="cover"
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            className="transition duration-700 group-hover:scale-[1.03]"
-                          />
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-6">
-                          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white sm:text-2xl">
-                            {item.title}
-                          </h3>
-                          <p className="mt-1 text-sm text-white/75">
-                            {item.subtitle}
-                          </p>
-                        </div>
-                      </m.article>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            );
-          })()}
+                <div className="pointer-events-none absolute inset-0 z-[6] bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] p-4 sm:p-6">
+                  <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white sm:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-white/75 sm:text-sm">{item.subtitle}</p>
+                </div>
+              </m.article>
+            ))}
+          </div>
         </section>
 
         {/* —— Services: all five media panels visible, hover expands —— */}
@@ -329,7 +241,7 @@ export default function CircleGallery() {
               All Articles
             </Link>
           </div>
-          <div className="mx-auto grid max-w-[1600px] gap-8 md:grid-cols-12 md:gap-5">
+          <div className="mx-auto grid max-w-[1600px] gap-8 md:grid-cols-3 md:gap-5">
             {HOME_ARTICLES.map((a, i) => (
               <m.article
                 key={a.src}
@@ -337,13 +249,6 @@ export default function CircleGallery() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: i * 0.07 }}
-                className={
-                  i === 0
-                    ? "md:col-span-5"
-                    : i === 1
-                      ? "md:col-span-4 md:mt-14"
-                      : "md:col-span-3 md:mt-6"
-                }
               >
                 <div
                   data-ragged-media

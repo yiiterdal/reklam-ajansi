@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { LayoutGroup, m } from "framer-motion";
+
+const HOME_REVEAL_PX = 120;
 
 const TABS = [
   { id: "work", label: "Home", href: "/" },
@@ -26,9 +29,26 @@ function activeTab(pathname: string): TabId {
 export default function Header() {
   const pathname = usePathname();
   const active = activeTab(pathname);
+  const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const onScroll = () => setScrolled(window.scrollY > HOME_REVEAL_PX);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const hidden = isHome && !scrolled;
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 bottom-0 z-[70] flex justify-center px-3 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:px-4 sm:pb-[calc(1.75rem+env(safe-area-inset-bottom,0px))]">
+    <header
+      aria-hidden={hidden || undefined}
+      className={`pointer-events-none fixed inset-x-0 bottom-0 z-[70] flex justify-center px-3 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] transition-[transform,opacity,visibility] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-4 sm:pb-[calc(1.75rem+env(safe-area-inset-bottom,0px))] ${
+        hidden ? "invisible translate-y-[140%] opacity-0" : "visible translate-y-0 opacity-100"
+      }`}
+    >
       <LayoutGroup id="primary-tabs">
         <nav
           aria-label="Primary"

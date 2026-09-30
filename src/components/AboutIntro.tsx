@@ -59,18 +59,22 @@ const PRINCIPLES = [
   {
     title: "Insight first",
     body: "Before we design anything, we find the real problem: the audience, the category and the one thing only you can say.",
+    image: "/images/about-extras/shot-collage-eye.jpg",
   },
   {
     title: "One idea, every surface",
     body: "A strong idea should work on a billboard, a phone screen and a box. We build systems, not one-offs.",
+    image: "/images/about-extras/shot-glass-rings.jpg",
   },
   {
     title: "Made by the people you meet",
     body: "The team that pitches the work is the team that makes it. No hand-offs, no diluted ideas.",
+    image: "/images/about-extras/shot-face-track.jpg",
   },
   {
     title: "Built to last",
     body: "Trends fade. We aim for work that still feels right years after launch.",
+    image: "/images/about-extras/shot-mountain-star.jpg",
   },
 ] as const;
 
@@ -298,22 +302,41 @@ export default function AboutIntro() {
 
       {/* Principles */}
       <section className="mt-28 px-3 sm:mt-36 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1600px] rounded-[2rem] bg-[#0c0c0c] px-6 py-16 text-white sm:px-12 sm:py-24 lg:px-16">
-          <Reveal>
+        <div className="relative mx-auto max-w-[1600px] overflow-hidden rounded-[2rem] bg-[#0c0c0c] px-6 py-16 text-white sm:px-12 sm:py-24 lg:px-16">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[140px]"
+          />
+
+          <Reveal className="relative">
             <Eyebrow dark>How we work</Eyebrow>
             <h2 className="mt-5 max-w-3xl font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight sm:text-6xl">
               Clear thinking,
               <br />
-              careful making.
+              <span className="text-white/45">careful making.</span>
             </h2>
           </Reveal>
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="relative mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {PRINCIPLES.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.07}>
-                <article className="group flex h-full flex-col rounded-2xl border border-white/10 p-6 transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.04] sm:p-7">
-                  <span className="font-mono text-sm text-white/35">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-10 text-xl font-semibold tracking-tight sm:mt-16">{p.title}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-white/60">{p.body}</p>
+              <Reveal key={p.title} delay={i * 0.07} className="h-full">
+                <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-500 hover:-translate-y-1 hover:border-white/25">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <HQImage
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 22vw"
+                      className="object-cover saturate-[0.35] transition duration-700 group-hover:scale-105 group-hover:saturate-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
+                    <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-mono text-xs font-semibold text-black">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-6 sm:p-7">
+                    <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-white/65">{p.body}</p>
+                  </div>
                 </article>
               </Reveal>
             ))}

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Syne } from "next/font/google";
+import { Instrument_Serif, Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import { SITE_DESCRIPTION, SITE_EMAIL, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -13,6 +13,14 @@ const syne = Syne({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-display",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -108,7 +116,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${syne.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${syne.variable} ${instrumentSerif.variable}`}>
       <body className="font-body antialiased">
         <script
           type="application/ld+json"
