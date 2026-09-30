@@ -8,6 +8,7 @@ const nav = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/portfolio" },
   { label: "Brands", href: "/brands" },
+  { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -76,7 +77,7 @@ export default function Footer() {
         {/* Meta strip */}
         <div className="flex items-center justify-between gap-4 border-b border-white/10 py-6">
           <span className={label}>(Bearstow&reg;)</span>
-          <span className={`${label} hidden md:inline`}>Brand &middot; Digital &middot; Content &middot; Motion</span>
+          <span className={`${label} hidden md:inline`}>Quiet in the den &middot; Loud in the world</span>
           <span className={`${label} flex items-center gap-2 text-cream/60`}>
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />

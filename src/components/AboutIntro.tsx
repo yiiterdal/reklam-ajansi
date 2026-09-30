@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, type ReactNode } from "react";
 import { m, useScroll, useTransform } from "framer-motion";
+import BearstowStory from "@/components/BearstowStory";
 import HQImage from "@/components/HQImage";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -247,6 +248,8 @@ export default function AboutIntro() {
       </section>
 
       <ScaleVideo />
+
+      <BearstowStory />
 
       {/* Story */}
       <section className="mx-auto mt-24 grid max-w-[1400px] gap-12 px-5 sm:mt-28 sm:px-8 lg:grid-cols-[1fr_1.15fr] lg:gap-20 lg:px-12">

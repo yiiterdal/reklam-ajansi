@@ -4,7 +4,7 @@ import AboutStudio from "@/components/AboutStudio";
 export const metadata: Metadata = {
   title: "About Us: Our Story, Services & Approach",
   description:
-    "Meet Bearstow, an independent creative studio where strategy, design and motion meet. Our story, our five crafts and how we work.",
+    "Who is Bearstow? From Old English stōw, a place: the bear's den, where ideas are raised until they're ready. Our story, manifesto, five crafts and how we work.",
   alternates: { canonical: "/about" },
 };
 

@@ -3,6 +3,7 @@
 import { m } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import HQImage from "@/components/HQImage";
 
 /**
  * Curtain transition: internal link clicks are intercepted, a dark panel wipes up
@@ -25,13 +26,40 @@ const LABELS: Record<string, string> = {
   "/portfolio": "Work",
   "/brands": "Brands",
   "/visuals": "Visuals",
+  "/news": "News",
 };
 
-function labelFor(path: string) {
+type Backdrop = { src: string; position?: string };
+
+// 2880x1800, built by scripts/make-transition-backdrops.ps1 (crop is baked in).
+const DEFAULT_BACKDROP: Backdrop = { src: "/images/transitions/about.jpg" };
+
+const BACKDROPS: Record<string, Backdrop> = {
+  "/": { src: "/images/transitions/home.jpg" },
+  "/about": DEFAULT_BACKDROP,
+  "/contact": { src: "/images/transitions/contact.jpg", position: "45% 50%" },
+  "/services": { src: "/images/transitions/services-studio.jpg", position: "60% 50%" },
+  "/portfolio": { src: "/images/transitions/work.jpg", position: "30% 50%" },
+  "/brands": { src: "/images/transitions/brands.jpg" },
+  "/visuals": { src: "/images/transitions/visuals.jpg" },
+  "/news": { src: "/images/transitions/visuals.jpg" },
+};
+
+function routeKey(path: string, table: Record<string, unknown>) {
   const clean = path.split(/[?#]/)[0].replace(/\/$/, "") || "/";
-  if (LABELS[clean]) return LABELS[clean];
+  if (clean in table) return clean;
   const first = "/" + (clean.split("/")[1] ?? "");
-  return LABELS[first] ?? "Bearstow";
+  return first in table ? first : null;
+}
+
+function labelFor(path: string) {
+  const key = routeKey(path, LABELS);
+  return key ? LABELS[key] : "Bearstow";
+}
+
+function backdropFor(path: string) {
+  const key = routeKey(path, BACKDROPS);
+  return key ? BACKDROPS[key] : DEFAULT_BACKDROP;
 }
 
 const panelVariants = {
@@ -39,6 +67,13 @@ const panelVariants = {
   cover: { y: "0%", transition: { duration: COVER_S, ease: EASE } },
   hold: { y: "0%", transition: { duration: 0 } },
   reveal: { y: "-100%", transition: { duration: REVEAL_S, ease: EASE } },
+};
+
+const backdropVariants = {
+  idle: { y: "-35%", scale: 1.15, transition: { duration: 0 } },
+  cover: { y: "0%", scale: 1.05, transition: { duration: COVER_S + 0.1, ease: EASE } },
+  hold: { y: "0%", scale: 1.05 },
+  reveal: { y: "35%", scale: 1.15, transition: { duration: REVEAL_S, ease: EASE } },
 };
 
 const labelVariants = {
@@ -53,6 +88,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>("idle");
   const [label, setLabel] = useState("");
+  const [backdrop, setBackdrop] = useState<Backdrop>(DEFAULT_BACKDROP);
   const phaseRef = useRef<Phase>("idle");
   const targetRef = useRef<string | null>(null);
   phaseRef.current = phase;
@@ -75,11 +111,30 @@ export default function PageTransition({ children }: { children: ReactNode }) {
       if (phaseRef.current !== "idle") return;
       targetRef.current = url.pathname + url.search + url.hash;
       setLabel(labelFor(url.pathname));
+      setBackdrop(backdropFor(url.pathname));
       document.documentElement.classList.add("is-page-transitioning");
       setPhase("cover");
     };
     window.addEventListener("click", onClick, true);
     return () => window.removeEventListener("click", onClick, true);
+  }, []);
+
+  useEffect(() => {
+    const preload = () => {
+      const srcs = new Set([DEFAULT_BACKDROP.src, ...Object.values(BACKDROPS).map((b) => b.src)]);
+      srcs.forEach((src) => {
+        const img = new window.Image();
+        img.decoding = "async";
+        img.src = src;
+      });
+    };
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    if (w.requestIdleCallback) {
+      w.requestIdleCallback(preload);
+      return;
+    }
+    const t = window.setTimeout(preload, 2500);
+    return () => window.clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -89,7 +144,10 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   }, [phase]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    const hash = window.location.hash.slice(1);
+    const anchor = hash ? document.getElementById(decodeURIComponent(hash)) : null;
+    if (anchor) anchor.scrollIntoView({ behavior: "auto", block: "start" });
+    else window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     if (phaseRef.current !== "hold" && phaseRef.current !== "cover") return;
     let raf = 0;
     const t = window.setTimeout(() => {
@@ -128,11 +186,25 @@ export default function PageTransition({ children }: { children: ReactNode }) {
         animate={phase}
         variants={panelVariants}
         onAnimationComplete={onPanelDone}
-        className={`fixed inset-0 z-[90] flex items-center justify-center bg-[#0c0c0c] text-white ${
+        className={`fixed inset-0 z-[90] flex items-center justify-center overflow-hidden bg-[#0c0c0c] text-white ${
           phase === "idle" ? "pointer-events-none invisible" : ""
         }`}
       >
-        <div className="overflow-hidden px-6 py-2">
+        <m.div initial="idle" animate={phase} variants={backdropVariants} className="absolute inset-0">
+          <HQImage
+            key={backdrop.src}
+            src={backdrop.src}
+            alt=""
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: backdrop.position ?? "50% 50%" }}
+          />
+        </m.div>
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+        <div className="relative overflow-hidden px-6 py-2">
           <m.p
             initial="idle"
             animate={phase}
@@ -142,7 +214,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
             {label}
           </m.p>
         </div>
-        <p className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] left-1/2 m-0 -translate-x-1/2 text-[11px] font-medium uppercase tracking-[0.3em] text-white/40">
+        <p className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] left-1/2 m-0 -translate-x-1/2 text-[11px] font-medium uppercase tracking-[0.3em] text-white/60">
           Bearstow
         </p>
       </m.div>

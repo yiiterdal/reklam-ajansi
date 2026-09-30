@@ -2,6 +2,7 @@
 
 import HQImage from "@/components/HQImage";
 import Link from "next/link";
+import { m } from "framer-motion";
 import SlowWorkVideo from "@/components/SlowWorkVideo";
 import { workPoster } from "@/lib/workMedia";
 
@@ -17,6 +18,12 @@ type Props = {
   imageSrc?: string;
   poster?: string;
   tone?: "dark" | "light";
+};
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const rise = {
+  hidden: { opacity: 0, y: 24 },
+  shown: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
 };
 
 /**
@@ -42,16 +49,26 @@ export default function StudioMediaHero({
       }`}
     >
       {videoSrc ? (
-        <div className="absolute inset-0">
+        <m.div
+          className="absolute inset-0"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: EASE }}
+        >
           <SlowWorkVideo
             src={videoSrc}
             poster={poster ?? workPoster(videoSrc)}
             rate={0.4}
             className="h-full w-full object-cover"
           />
-        </div>
+        </m.div>
       ) : imageSrc ? (
-        <div className="absolute inset-0">
+        <m.div
+          className="absolute inset-0"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: EASE }}
+        >
           <HQImage
             src={imageSrc}
             alt=""
@@ -60,7 +77,7 @@ export default function StudioMediaHero({
             sizes="100vw"
             className="object-cover"
           />
-        </div>
+        </m.div>
       ) : null}
 
       <div
@@ -78,37 +95,51 @@ export default function StudioMediaHero({
         }`}
       />
 
-      <div className="relative mx-auto flex min-h-[88svh] max-w-[1600px] flex-col justify-end px-5 pb-20 pt-16 sm:px-8 lg:px-12 lg:pb-24 lg:pt-20">
-        <p
+      <m.div
+        initial="hidden"
+        animate="shown"
+        variants={{ shown: { transition: { staggerChildren: 0.09, delayChildren: 0.3 } } }}
+        className="relative mx-auto flex min-h-[88svh] max-w-[1600px] flex-col justify-end px-5 pb-20 pt-16 sm:px-8 lg:px-12 lg:pb-24 lg:pt-20"
+      >
+        <m.p
+          variants={rise}
           className={`text-xs font-semibold uppercase tracking-[0.28em] ${
             dark ? "text-white/50" : "text-black/40"
           }`}
         >
           {label}
-        </p>
-        <h1 className="mt-5 max-w-4xl font-[family-name:var(--font-display)] text-[clamp(2.6rem,7vw,5.5rem)] font-bold leading-[0.98] tracking-tight">
-          {title}
+        </m.p>
+        <h1 className="mt-5 max-w-4xl overflow-hidden pb-[0.06em] font-[family-name:var(--font-display)] text-[clamp(2.6rem,7vw,5.5rem)] font-bold leading-[0.98] tracking-tight">
+          <m.span
+            className="block"
+            variants={{ hidden: { y: "105%" }, shown: { y: "0%", transition: { duration: 1, ease: EASE } } }}
+          >
+            {title}
+          </m.span>
         </h1>
-        <p
+        <m.p
+          variants={rise}
           className={`mt-6 max-w-xl text-base leading-relaxed sm:text-lg ${
             dark ? "text-white/70" : "text-black/55"
           }`}
         >
           {description}
-        </p>
+        </m.p>
         {ctaHref && ctaLabel ? (
-          <Link
-            href={ctaHref}
-            className={`mt-9 inline-flex w-fit rounded-full px-5 py-2.5 text-sm font-medium transition ${
-              dark
-                ? "bg-white text-black hover:opacity-90"
-                : "bg-black text-white hover:opacity-80"
-            }`}
-          >
-            {ctaLabel}
-          </Link>
+          <m.div variants={rise}>
+            <Link
+              href={ctaHref}
+              className={`mt-9 inline-flex w-fit rounded-full px-5 py-2.5 text-sm font-medium transition ${
+                dark
+                  ? "bg-white text-black hover:opacity-90"
+                  : "bg-black text-white hover:opacity-80"
+              }`}
+            >
+              {ctaLabel}
+            </Link>
+          </m.div>
         ) : null}
-      </div>
+      </m.div>
     </section>
   );
 }

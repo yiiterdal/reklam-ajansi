@@ -15,6 +15,7 @@ import {
   HOME_WORK,
   workPoster,
 } from "@/lib/workMedia";
+import { NEWS_POSTS } from "@/lib/news";
 
 /**
  * Layout inspired by https://dirtverse.co/
@@ -34,7 +35,7 @@ export default function CircleGallery() {
               { label: "About", href: "/about", mobile: true },
               { label: "Work", href: "/", mobile: true },
               { label: "Services", href: "/services", mobile: false },
-              { label: "News", href: "/visuals", mobile: false },
+              { label: "News", href: "/news", mobile: false },
             ].map((l) => (
               <Link
                 key={l.label}
@@ -75,18 +76,8 @@ export default function CircleGallery() {
         </div>
       </section>
 
-      {/* —— About line —— */}
-      <section className="border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/40 lg:col-span-2">
-            About
-          </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.15] tracking-tight lg:col-span-10">
-            Bearstow is a creative studio building for the deeply invested, the restless
-            start-ups and the brands that want culture to move with them.
-          </h2>
-        </div>
-      </section>
+      {/* —— Who we are —— */}
+      <WhoWeAre />
 
       {/* Ragged Edge CurveEffect wraps media sections */}
       <RaggedCurveRoot distance={34} strength={1}>
@@ -235,8 +226,8 @@ export default function CircleGallery() {
               In the news
             </p>
             <Link
-              href="/about"
-              className="rounded-full bg-[#ececec] px-4 py-2 text-sm font-medium text-black/70"
+              href="/news"
+              className="rounded-full bg-[#ececec] px-4 py-2 text-sm font-medium text-black/70 transition hover:bg-[#e0e0e0]"
             >
               All Articles
             </Link>
@@ -250,23 +241,28 @@ export default function CircleGallery() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: i * 0.07 }}
               >
-                <div
-                  data-ragged-media
-                  className={`relative mb-4 overflow-hidden rounded-2xl bg-[#f0f0f0] ${a.aspect}`}
+                <Link
+                  href={`/news/${NEWS_POSTS.find((p) => p.media.src === a.src)?.slug ?? ""}`}
+                  className="group block"
                 >
-                  <SlowWorkVideo
-                    src={a.src}
-                    poster={a.poster ?? workPoster(a.src)}
-                    rate={0.45}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/40">
-                  {a.subtitle}
-                </p>
-                <h3 className="mt-2 font-[family-name:var(--font-display)] text-lg font-bold leading-snug tracking-tight sm:text-xl">
-                  {a.title}
-                </h3>
+                  <div
+                    data-ragged-media
+                    className={`relative mb-4 overflow-hidden rounded-2xl bg-[#f0f0f0] ${a.aspect}`}
+                  >
+                    <SlowWorkVideo
+                      src={a.src}
+                      poster={a.poster ?? workPoster(a.src)}
+                      rate={0.45}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/40">
+                    {a.subtitle}
+                  </p>
+                  <h3 className="mt-2 font-[family-name:var(--font-display)] text-lg font-bold leading-snug tracking-tight sm:text-xl">
+                    {a.title}
+                  </h3>
+                </Link>
               </m.article>
             ))}
           </div>
@@ -313,6 +309,136 @@ export default function CircleGallery() {
         />
       </section>
     </div>
+  );
+}
+
+const WHO_PILLARS = [
+  {
+    n: "01",
+    title: "Who we are",
+    body: "A small, senior team of strategists, designers, filmmakers and developers. No layers, no hand-offs: the people you meet are the people who make the work.",
+  },
+  {
+    n: "02",
+    title: "How we work",
+    body: "Strategy, identity, digital, content and motion under one roof. One idea carried end to end, so the brand feels the same on a billboard as it does in a feed.",
+  },
+  {
+    n: "03",
+    title: "Why we exist",
+    body: "Most brand work is forgettable. We started Bearstow to make things people actually notice, remember and want to share.",
+  },
+];
+
+const WHO_STATS = [
+  { value: "2024", label: "Founded" },
+  { value: "5", label: "Disciplines in-house" },
+  { value: "1", label: "Team, start to finish" },
+  { value: "0", label: "Templates" },
+];
+
+function WhoWeAre() {
+  const ease = [0.22, 1, 0.36, 1] as const;
+
+  return (
+    <section className="relative overflow-hidden border-t border-black/5 px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 top-10 h-[28rem] w-[28rem] rounded-full bg-violet-200/40 blur-[120px]"
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-black/40 lg:col-span-2 lg:pt-4">
+            <span className="h-px w-8 bg-black/25" />
+            Who we are
+          </p>
+          <m.h2
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.8, ease }}
+            className="font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,4.25rem)] font-bold leading-[1.02] tracking-[-0.03em] lg:col-span-10"
+          >
+            A new-generation communications agency for brands that want to be{" "}
+            <span className="font-[family-name:var(--font-serif)] font-normal italic tracking-normal text-violet-600">
+              felt
+            </span>
+            , not just seen.
+          </m.h2>
+        </div>
+
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.7, ease, delay: 0.15 }}
+          className="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-3 lg:pl-[16.66%]"
+        >
+          <p className="text-lg text-black/60 sm:text-xl">
+            <span className="font-[family-name:var(--font-display)] font-bold text-black">bear</span>
+            <span className="mx-2 text-black/30">+</span>
+            <span className="font-[family-name:var(--font-display)] font-bold text-black">stōw</span>
+            <span className="ml-2 font-mono text-xs text-black/40">(Old English, &ldquo;a place&rdquo;)</span>
+            <span className="mx-2 text-black/30">=</span>
+            <span className="font-[family-name:var(--font-serif)] text-[1.15em] italic text-violet-600">the bear&apos;s den.</span>{" "}
+            Where ideas are raised until they&apos;re ready.
+          </p>
+          <Link
+            href="/about#who-is-bearstow"
+            className="text-sm font-semibold text-black/50 underline-offset-4 transition hover:text-black hover:underline"
+          >
+            Read our story &rarr;
+          </Link>
+        </m.div>
+
+        <div className="mt-16 grid gap-10 border-t border-black/10 pt-10 md:grid-cols-3 md:gap-8 lg:mt-24 lg:pl-[16.66%]">
+          {WHO_PILLARS.map((p, i) => (
+            <m.div
+              key={p.n}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: i * 0.08, ease }}
+            >
+              <p className="font-mono text-[11px] text-black/35">({p.n})</p>
+              <h3 className="mt-3 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight">
+                {p.title}
+              </h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-black/60">{p.body}</p>
+            </m.div>
+          ))}
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-black/10 lg:mt-20 lg:grid-cols-4">
+          {WHO_STATS.map((s, i) => (
+            <m.div
+              key={s.label}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, delay: i * 0.06 }}
+              className="bg-white p-6 sm:p-8"
+            >
+              <p className="font-[family-name:var(--font-display)] text-5xl font-bold tracking-[-0.04em] sm:text-6xl">
+                {s.value}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/40">{s.label}</p>
+            </m.div>
+          ))}
+        </div>
+
+        <div className="mt-10 flex justify-end">
+          <Link
+            href="/about"
+            className="group inline-flex items-center gap-3 rounded-full border border-black/15 px-5 py-2.5 text-sm font-semibold transition hover:border-black hover:bg-black hover:text-white"
+          >
+            More about us
+            <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 
